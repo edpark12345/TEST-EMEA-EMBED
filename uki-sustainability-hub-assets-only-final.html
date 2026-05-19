@@ -4,19 +4,20 @@
      2. Access via: https://[tenant].sharepoint.com/sites/[SiteName]/SiteAssets/uki-sustainability-hub-assets-only-final.html
      3. Or embed in a SharePoint page using the Embed web part with the file URL
      4. All links open in the top-level window when embedded in an iframe
+     5. Toggle Internal/External mode in the top-right for demo-safe views
 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="UKI Sustainability Hub — AI Accelerator & Asset Library. 28 production-grade sustainability AI accelerators organised by sector.">
-<title>AI Accelerator &amp; Asset Library — UKI Sustainability Hub | Accenture</title>
+<meta name="description" content="EMEA Sustainability — AI Accelerator & Asset Library. 28 production-grade sustainability AI accelerators organised by sector.">
+<title>AI Accelerator &amp; Asset Library — EMEA Sustainability | Accenture</title>
 <style>
 /* ==========================================================================
-   ACCENTURE UKI SUSTAINABILITY HUB — AI ACCELERATOR & ASSET LIBRARY
-   (Final — dark hero, internal/external toggle, production-ready)
-   SharePoint-embeddable, fully self-contained, no external dependencies.
+   ACCENTURE UKI SUSTAINABILITY HUB — AI ASSET LIBRARY  (final — production)
+   Dark theme · Internal/External toggle · SharePoint-embeddable
+   Fully self-contained, no external dependencies.
    ========================================================================== */
 
 :root {
@@ -71,7 +72,7 @@
 
 html {
   scrollbar-width: thin;
-  scrollbar-color: var(--ink-200) var(--ink-50);
+  scrollbar-color: var(--ink-600) var(--ink-800);
 }
 
 html, body {
@@ -142,13 +143,11 @@ mark {
 
 
 /* ==========================================================================
-   DARK NAVBAR
+   DARK TOP NAVIGATION
    ========================================================================== */
 
 .topnav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  position: sticky; top: 0; z-index: 100;
   background: var(--ink-900);
   color: var(--white);
   border-bottom: 1px solid var(--ink-700);
@@ -156,25 +155,16 @@ mark {
 }
 
 .topnav-inner {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 32px;
-  height: 68px;
-  display: flex;
-  align-items: center;
-  gap: 24px;
+  max-width: 1440px; margin: 0 auto;
+  padding: 0 32px; height: 68px;
+  display: flex; align-items: center; gap: 24px;
 }
 
 .brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 16px;
+  display: flex; align-items: center; gap: 12px;
+  text-decoration: none; color: var(--white);
+  font-family: var(--font-display); font-weight: 800; font-size: 16px;
   letter-spacing: -0.02em;
-  color: var(--white);
-  text-decoration: none;
 }
 .brand:hover { text-decoration: none; }
 
@@ -187,9 +177,7 @@ mark {
 }
 
 .brand-divider {
-  width: 1px;
-  height: 24px;
-  background: var(--ink-600);
+  width: 1px; height: 24px; background: var(--ink-600);
 }
 
 .brand-product {
@@ -200,7 +188,7 @@ mark {
 
 .nav-spacer { flex: 1; }
 
-/* Internal/External Mode Toggle */
+/* Internal / External toggle */
 .mode-toggle {
   display: flex;
   align-items: center;
@@ -212,11 +200,11 @@ mark {
 }
 
 .mode-pill {
-  padding: 6px 14px;
+  padding: 6px 16px;
   border-radius: 999px;
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--ink-300);
   cursor: pointer;
@@ -224,13 +212,12 @@ mark {
   display: flex;
   align-items: center;
   gap: 6px;
-  border: none;
-  background: none;
+  white-space: nowrap;
 }
+.mode-pill:hover { color: var(--ink-100); }
 
 .mode-pill .dot {
-  width: 6px;
-  height: 6px;
+  width: 6px; height: 6px;
   border-radius: 50%;
   background: currentColor;
   opacity: 0.5;
@@ -241,11 +228,19 @@ mark {
   color: var(--ink-900);
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
-
 .mode-pill.active .dot {
   background: var(--success);
   opacity: 1;
   box-shadow: 0 0 8px var(--success);
+}
+
+.mode-pill.active.ext {
+  background: linear-gradient(135deg, var(--accenture-purple), var(--accenture-magenta));
+  color: var(--white);
+}
+.mode-pill.active.ext .dot {
+  background: var(--white);
+  box-shadow: 0 0 8px var(--white);
 }
 
 
@@ -254,226 +249,126 @@ mark {
    ========================================================================== */
 
 .hero {
-  position: relative;
-  border-radius: var(--radius-xl);
-  padding: 56px 48px;
-  margin-bottom: 32px;
   background: linear-gradient(135deg, #0A0A14 0%, #1A0A2E 50%, #2D0F4A 100%);
-  color: var(--white);
+  position: relative;
   overflow: hidden;
-  isolation: isolate;
+  padding: 60px 32px 56px;
 }
 
 .hero::before {
   content: '';
   position: absolute;
-  top: -200px;
-  right: -200px;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(161, 0, 255, 0.45) 0%, transparent 60%);
+  top: -120px; right: -80px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(161,0,255,0.18) 0%, transparent 70%);
   pointer-events: none;
-  z-index: -1;
 }
 
 .hero::after {
   content: '';
   position: absolute;
-  bottom: -150px;
-  left: -150px;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(230, 25, 230, 0.3) 0%, transparent 60%);
+  bottom: -100px; left: 20%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(230,25,230,0.10) 0%, transparent 70%);
   pointer-events: none;
-  z-index: -1;
 }
 
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 48px;
-  align-items: center;
+.hero-inner {
+  max-width: 1440px;
+  margin: 0 auto;
   position: relative;
+  z-index: 1;
 }
 
 .hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 14px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-size: 11px; font-weight: 700;
   text-transform: uppercase;
-  color: var(--white);
-  margin-bottom: 20px;
+  letter-spacing: 0.18em;
+  color: var(--accenture-purple-light);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
 }
-
-.hero-eyebrow .pulse {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #4ADE80;
-  box-shadow: 0 0 8px #4ADE80;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%      { opacity: 0.6; transform: scale(1.3); }
+.hero-eyebrow::before {
+  content: '';
+  width: 24px; height: 2px;
+  background: var(--accenture-purple);
 }
 
 .hero-title {
-  font-family: var(--font-display);
-  font-size: 48px;
+  font-size: 42px;
   font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
   color: var(--white);
-  margin-bottom: 20px;
-}
-
-.hero-title .accent {
-  background: linear-gradient(90deg, var(--accenture-purple-light), var(--accenture-pink));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  max-width: 780px;
+  margin-bottom: 16px;
 }
 
 .hero-subtitle {
-  font-size: 17px;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.75);
-  margin-bottom: 28px;
-  max-width: 560px;
-}
-
-.hero-search {
-  position: relative;
-  max-width: 560px;
-}
-
-.hero-search-input {
-  width: 100%;
-  padding: 16px 56px 16px 22px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 999px;
-  color: var(--white);
-  font-family: var(--font-body);
-  font-size: 15px;
-  outline: none;
-  transition: all 0.2s ease;
-  backdrop-filter: blur(8px);
-}
-
-.hero-search-input::placeholder {
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.hero-search-input:focus {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: var(--accenture-purple-light);
-  box-shadow: 0 0 0 4px rgba(161, 0, 255, 0.18);
-}
-
-.hero-search-btn {
-  position: absolute;
-  right: 6px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accenture-purple), var(--accenture-magenta));
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  cursor: pointer;
-}
-
-.hero-search-btn:hover {
-  filter: brightness(1.1);
+  color: var(--ink-300);
+  font-size: 16px;
+  max-width: 680px;
+  line-height: 1.6;
+  margin-bottom: 32px;
 }
 
 .hero-stats {
   display: flex;
   gap: 32px;
-  margin-top: 32px;
-  padding-top: 24px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  flex-wrap: wrap;
+  margin-bottom: 32px;
 }
 
+.hero-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
 .hero-stat-num {
   font-family: var(--font-display);
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 800;
-  letter-spacing: -0.02em;
   color: var(--white);
+  letter-spacing: -0.02em;
   line-height: 1;
 }
-
 .hero-stat-label {
-  font-size: 12px;
+  font-size: 13px;
+  color: var(--ink-400);
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.6);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-top: 6px;
 }
 
-/* Hero visual: stylised geometric mark */
-.hero-visual {
-  position: relative;
-  height: 320px;
+/* Glassmorphism search */
+.hero-search {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  padding: 0 24px;
+  max-width: 520px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.2s;
 }
-
-.hero-mark {
-  font-family: var(--font-display);
-  font-size: 280px;
-  font-weight: 900;
-  line-height: 1;
-  background: linear-gradient(135deg, var(--accenture-purple) 0%, var(--accenture-magenta) 60%, var(--accenture-pink) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 40px rgba(161, 0, 255, 0.45));
-  letter-spacing: -0.05em;
-  user-select: none;
+.hero-search:focus-within {
+  background: rgba(255,255,255,0.12);
+  border-color: var(--accenture-purple);
+  box-shadow: 0 0 0 3px rgba(161,0,255,0.15);
 }
-
-.hero-mark-orbit {
-  position: absolute;
-  inset: 0;
-  border: 1px dashed rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-  animation: orbit 30s linear infinite;
+.hero-search-icon { color: var(--ink-400); flex-shrink: 0; }
+.hero-search input {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 14px 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--white);
+  outline: none;
 }
-
-@keyframes orbit {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-.hero-mark-dot {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--accenture-purple-light);
-  box-shadow: 0 0 16px var(--accenture-purple-light);
-  top: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-}
+.hero-search input::placeholder { color: var(--ink-400); }
 
 
 /* ==========================================================================
@@ -492,35 +387,6 @@ mark {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
-.section-header {
-  margin-bottom: 28px;
-}
-.section-eyebrow {
-  font-size: 11px; font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--accenture-purple-deep);
-  margin-bottom: 10px;
-  display: inline-block;
-}
-.section-title { font-size: 36px; line-height: 1.15; max-width: 780px; }
-.section-subtitle {
-  margin-top: 12px;
-  color: var(--ink-500);
-  font-size: 16px;
-  max-width: 720px;
-  line-height: 1.55;
-}
-
-.section-toolbar {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  flex-wrap: wrap;
-  margin: 24px 0;
-}
-.section-toolbar .spacer { flex: 1; }
 
 
 /* ==========================================================================
@@ -555,13 +421,6 @@ mark {
   box-shadow: 0 12px 28px rgba(161,0,255,0.35);
 }
 
-.btn-light {
-  background: var(--white);
-  color: var(--ink-900);
-  box-shadow: var(--shadow);
-}
-.btn-light:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
-
 .btn-ghost {
   background: var(--ink-50);
   color: var(--ink-800);
@@ -569,25 +428,12 @@ mark {
 }
 .btn-ghost:hover { background: var(--ink-100); border-color: var(--ink-300); }
 
-.btn-outline {
-  background: transparent;
-  color: var(--ink-800);
-  border: 1px solid var(--ink-200);
-}
-.btn-outline:hover { background: var(--ink-50); border-color: var(--ink-400); }
-
 .btn-sm { padding: 7px 12px; font-size: 12.5px; }
 
 
 /* ==========================================================================
    FILTER CHIPS
    ========================================================================== */
-
-.chip-row {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
 
 .chip {
   appearance: none;
@@ -612,64 +458,8 @@ mark {
 
 
 /* ==========================================================================
-   ASSET LIBRARY  (card system)
+   SECTOR TILES
    ========================================================================== */
-
-.asset-overview-intro {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 24px;
-  padding: 16px 22px;
-  background: var(--white);
-  border: 1px solid var(--ink-100);
-  border-radius: var(--radius-lg);
-  flex-wrap: wrap;
-}
-.asset-overview-intro-text {
-  font-size: 13.5px;
-  color: var(--ink-500);
-  line-height: 1.5;
-  flex: 1;
-  min-width: 220px;
-}
-.asset-overview-intro-text strong { color: var(--ink-900); font-weight: 700; }
-.asset-overview-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  flex: 0 1 auto;
-}
-.asset-overview-search {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--ink-50);
-  border: 1px solid var(--ink-100);
-  border-radius: 999px;
-  padding: 0 18px;
-  min-width: 240px;
-  flex: 0 1 320px;
-  transition: all 0.18s;
-}
-.asset-overview-search:focus-within {
-  background: var(--white);
-  border-color: var(--accenture-purple);
-  box-shadow: 0 0 0 3px rgba(161,0,255,0.1);
-}
-.asset-overview-search-icon { color: var(--ink-400); flex-shrink: 0; }
-.asset-overview-search input {
-  flex: 1;
-  background: none;
-  border: none;
-  padding: 10px 0;
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: var(--ink-800);
-  outline: none;
-}
 
 .sector-grid {
   display: grid;
@@ -736,9 +526,7 @@ mark {
 .sector-tile-icon {
   width: 56px; height: 56px;
   border-radius: var(--radius-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   color: var(--white);
   flex-shrink: 0;
   box-shadow: var(--shadow-sm);
@@ -747,57 +535,34 @@ mark {
 
 .sector-tile-count {
   font-family: var(--font-display);
-  font-size: 44px;
-  font-weight: 800;
-  line-height: 0.9;
-  letter-spacing: -0.03em;
+  font-size: 44px; font-weight: 800;
+  line-height: 0.9; letter-spacing: -0.03em;
   color: var(--ink-900);
 }
 .sector-tile-count-label {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--ink-400);
-  font-weight: 600;
-  margin-top: 4px;
-  text-align: right;
+  font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--ink-400);
+  font-weight: 600; margin-top: 4px; text-align: right;
 }
 
 .sector-tile-title {
   font-family: var(--font-display);
-  font-size: 21px;
-  font-weight: 700;
-  color: var(--ink-900);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  position: relative;
+  font-size: 21px; font-weight: 700;
+  color: var(--ink-900); line-height: 1.2;
+  letter-spacing: -0.01em; position: relative;
 }
 .sector-tile-desc {
-  font-size: 13.5px;
-  color: var(--ink-500);
-  line-height: 1.55;
-  position: relative;
+  font-size: 13.5px; color: var(--ink-500);
+  line-height: 1.55; position: relative;
 }
 
 .sector-tile-breakdown {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  font-size: 11.5px;
-  font-weight: 600;
-  color: var(--ink-500);
-  margin-top: 2px;
-  position: relative;
+  display: flex; gap: 14px; flex-wrap: wrap;
+  font-size: 11.5px; font-weight: 600;
+  color: var(--ink-500); margin-top: 2px; position: relative;
 }
-.sector-tile-breakdown-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-}
-.sector-tile-breakdown-item .dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-}
+.sector-tile-breakdown-item { display: inline-flex; align-items: center; gap: 5px; }
+.sector-tile-breakdown-item .dot { width: 7px; height: 7px; border-radius: 50%; }
 .sector-tile-breakdown-item.proven { color: #037A6D; }
 .sector-tile-breakdown-item.proven .dot { background: var(--mat-proven); }
 .sector-tile-breakdown-item.ready  { color: #1A3ACC; }
@@ -806,20 +571,13 @@ mark {
 .sector-tile-breakdown-item.mvp .dot    { background: var(--mat-mvp); }
 
 .sector-tile-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 600;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 600;
   color: var(--accenture-purple-deep);
-  margin-top: auto;
-  padding-top: 8px;
-  position: relative;
-  transition: gap 0.2s;
+  margin-top: auto; padding-top: 8px;
+  position: relative; transition: gap 0.2s;
 }
-.sector-tile:hover .sector-tile-cta {
-  gap: 10px;
-}
+.sector-tile:hover .sector-tile-cta { gap: 10px; }
 
 .sector-tile.esg          { --tile-accent: linear-gradient(90deg, #00A862, #00C97A); --tile-glow: radial-gradient(400px 200px at 100% 0%, rgba(0,168,98,0.10), transparent 60%); }
 .sector-tile.netzero      { --tile-accent: linear-gradient(90deg, #007AA0, #00B6F0); --tile-glow: radial-gradient(400px 200px at 100% 0%, rgba(0,182,240,0.10), transparent 60%); }
@@ -827,57 +585,39 @@ mark {
 .sector-tile.nature       { --tile-accent: linear-gradient(90deg, #2E7D32, #66BB6A); --tile-glow: radial-gradient(400px 200px at 100% 0%, rgba(46,125,50,0.10), transparent 60%); }
 .sector-tile.operating    { --tile-accent: linear-gradient(90deg, var(--accenture-purple), var(--accenture-magenta)); --tile-glow: radial-gradient(400px 200px at 100% 0%, rgba(161,0,255,0.10), transparent 60%); }
 
-/* ----- Detail-view back nav (breadcrumb) ----- */
+
+/* ==========================================================================
+   DETAIL VIEW
+   ========================================================================== */
+
 .asset-detail-nav {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 22px;
-  padding: 14px 20px;
-  background: var(--white);
-  border: 1px solid var(--ink-100);
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 22px; padding: 14px 20px;
+  background: var(--white); border: 1px solid var(--ink-100);
   border-radius: var(--radius-lg);
   animation: panelSlide 0.28s cubic-bezier(0.2,0.8,0.2,1);
 }
 .asset-detail-back {
-  appearance: none;
-  background: var(--ink-50);
-  border: 1px solid var(--ink-100);
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--ink-700);
-  padding: 8px 14px;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  transition: all 0.18s;
-  flex-shrink: 0;
+  appearance: none; background: var(--ink-50);
+  border: 1px solid var(--ink-100); font-family: inherit;
+  font-size: 13px; font-weight: 600; color: var(--ink-700);
+  padding: 8px 14px; border-radius: 999px;
+  display: inline-flex; align-items: center; gap: 8px;
+  cursor: pointer; transition: all 0.18s; flex-shrink: 0;
 }
 .asset-detail-back:hover {
-  background: var(--ink-900);
-  color: var(--white);
-  border-color: var(--ink-900);
-  transform: translateX(-2px);
+  background: var(--ink-900); color: var(--white);
+  border-color: var(--ink-900); transform: translateX(-2px);
 }
 .asset-detail-breadcrumb-sep { color: var(--ink-300); }
 .asset-detail-breadcrumb-current {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--ink-900);
-  font-weight: 600;
+  display: inline-flex; align-items: center; gap: 10px;
+  color: var(--ink-900); font-weight: 600;
 }
 .asset-detail-breadcrumb-icon {
-  width: 28px; height: 28px;
-  border-radius: var(--radius-sm);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--white);
-  flex-shrink: 0;
+  width: 28px; height: 28px; border-radius: var(--radius-sm);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--white); flex-shrink: 0;
 }
 .asset-detail-breadcrumb-icon svg { width: 16px; height: 16px; }
 .asset-detail-breadcrumb-icon.esg          { background: linear-gradient(135deg, #00A862, #00C97A); }
@@ -887,125 +627,56 @@ mark {
 .asset-detail-breadcrumb-icon.operating    { background: linear-gradient(135deg, var(--accenture-purple), var(--accenture-magenta)); }
 
 .asset-detail-breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 13px;
-  color: var(--ink-400);
-  flex: 1;
-  min-width: 0;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: var(--ink-400); flex: 1; min-width: 0;
 }
 .asset-detail-breadcrumb-counts {
-  font-size: 12px;
-  color: var(--ink-500);
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-  padding: 0 4px;
-  border-left: 1px solid var(--ink-100);
-  border-right: 1px solid var(--ink-100);
-  padding-left: 14px;
-  padding-right: 14px;
+  font-size: 12px; color: var(--ink-500); font-weight: 500;
+  display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+  border-left: 1px solid var(--ink-100); border-right: 1px solid var(--ink-100);
+  padding: 0 14px;
 }
 .asset-detail-breadcrumb-counts strong { color: var(--ink-900); font-weight: 700; }
 
-.submit-accelerator-btn {
-  white-space: nowrap;
-  flex-shrink: 0;
-}
+.submit-accelerator-btn { white-space: nowrap; flex-shrink: 0; }
+
+
+/* ==========================================================================
+   ASSET TOOLBAR & SEARCH
+   ========================================================================== */
 
 .asset-toolbar.hidden { display: none; }
-
 .asset-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  align-items: center;
-  margin-bottom: 24px;
-  padding: 18px 22px;
-  background: var(--white);
-  border: 1px solid var(--ink-100);
+  display: flex; flex-wrap: wrap; gap: 16px; align-items: center;
+  margin-bottom: 24px; padding: 18px 22px;
+  background: var(--white); border: 1px solid var(--ink-100);
   border-radius: var(--radius-lg);
 }
 
 .asset-search {
-  flex: 1;
-  min-width: 240px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--ink-50);
-  border: 1px solid var(--ink-100);
-  border-radius: 999px;
-  padding: 0 18px;
-  transition: all 0.18s;
+  flex: 1; min-width: 240px;
+  display: flex; align-items: center; gap: 10px;
+  background: var(--ink-50); border: 1px solid var(--ink-100);
+  border-radius: 999px; padding: 0 18px; transition: all 0.18s;
 }
 .asset-search:focus-within {
-  background: var(--white);
-  border-color: var(--accenture-purple);
+  background: var(--white); border-color: var(--accenture-purple);
   box-shadow: 0 0 0 3px rgba(161,0,255,0.1);
 }
 .asset-search-icon { color: var(--ink-400); flex-shrink: 0; }
 .asset-search input {
-  flex: 1;
-  background: none;
-  border: none;
-  padding: 11px 0;
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: var(--ink-800);
-  outline: none;
+  flex: 1; background: none; border: none;
+  padding: 11px 0; font-family: var(--font-body);
+  font-size: 14px; color: var(--ink-800); outline: none;
 }
 
-.asset-results-count {
-  font-size: 13px;
-  color: var(--ink-500);
-  font-weight: 500;
-}
+.asset-results-count { font-size: 13px; color: var(--ink-500); font-weight: 500; }
 .asset-results-count strong { color: var(--ink-900); font-weight: 700; }
 
-.asset-sector-group { margin-bottom: 36px; }
 
-.asset-sector-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 18px;
-  padding-bottom: 12px;
-  border-bottom: 2px solid var(--ink-100);
-}
-
-.asset-sector-icon {
-  width: 36px; height: 36px;
-  border-radius: var(--radius);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--white);
-  flex-shrink: 0;
-}
-.asset-sector-icon.esg          { background: linear-gradient(135deg, #00A862, #00C97A); }
-.asset-sector-icon.netzero      { background: linear-gradient(135deg, #007AA0, #00B6F0); }
-.asset-sector-icon.value-chain  { background: linear-gradient(135deg, #C28000, #F2A900); }
-.asset-sector-icon.nature       { background: linear-gradient(135deg, #2E7D32, #66BB6A); }
-.asset-sector-icon.operating    { background: linear-gradient(135deg, var(--accenture-purple), var(--accenture-magenta)); }
-
-.asset-sector-title {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--ink-900);
-  letter-spacing: -0.01em;
-}
-
-.asset-sector-count {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--ink-400);
-  background: var(--ink-50);
-  padding: 4px 10px;
-  border-radius: 999px;
-  margin-left: auto;
-}
+/* ==========================================================================
+   ASSET CARDS
+   ========================================================================== */
 
 .asset-grid-new {
   display: grid;
@@ -1014,63 +685,40 @@ mark {
 }
 
 .asset-card-new {
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--ink-100);
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.25s;
+  background: var(--white); border-radius: var(--radius-lg);
+  border: 1px solid var(--ink-100); padding: 22px;
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden; transition: all 0.25s;
   opacity: 0;
   animation: cardIn 0.4s cubic-bezier(0.2,0.8,0.2,1) forwards;
   animation-delay: calc(var(--i, 0) * 30ms);
 }
 .asset-card-new::before {
-  content: '';
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 3px;
+  content: ''; position: absolute; inset: 0 0 auto 0; height: 3px;
   background: linear-gradient(90deg, var(--accenture-purple), var(--accenture-magenta));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s;
+  transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
 }
 .asset-card-new:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--ink-200);
+  transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: var(--ink-200);
 }
 .asset-card-new:hover::before { transform: scaleX(1); }
 
 .asset-card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 14px;
+  display: flex; justify-content: space-between;
+  align-items: flex-start; gap: 12px; margin-bottom: 14px;
 }
 
 .asset-card-icon {
-  width: 44px; height: 44px;
-  border-radius: var(--radius);
+  width: 44px; height: 44px; border-radius: var(--radius);
   display: flex; align-items: center; justify-content: center;
-  color: var(--white);
-  flex-shrink: 0;
+  color: var(--white); flex-shrink: 0;
 }
 
 .maturity-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 999px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 700; padding: 4px 10px;
+  border-radius: 999px; text-transform: uppercase;
+  letter-spacing: 0.06em; white-space: nowrap;
 }
 .maturity-badge .dot { width: 6px; height: 6px; border-radius: 50%; }
 .maturity-badge.proven { background: rgba(5,242,219,0.12); color: #037A6D; }
@@ -1081,189 +729,92 @@ mark {
 .maturity-badge.mvp .dot { background: var(--mat-mvp); box-shadow: 0 0 6px var(--mat-mvp); }
 
 .asset-card-name {
-  font-family: var(--font-display);
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--ink-900);
-  line-height: 1.25;
-  margin-bottom: 8px;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display); font-size: 17px; font-weight: 700;
+  color: var(--ink-900); line-height: 1.25; margin-bottom: 8px; letter-spacing: -0.01em;
 }
-
 .asset-card-sector {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--ink-400);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 10px;
+  font-size: 11px; font-weight: 600; color: var(--ink-400);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px;
 }
-
 .asset-card-summary {
-  font-size: 13.5px;
-  color: var(--ink-600);
-  line-height: 1.55;
-  margin-bottom: 14px;
+  font-size: 13.5px; color: var(--ink-600); line-height: 1.55; margin-bottom: 14px;
 }
 
-.asset-card-details {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.32s cubic-bezier(0.2,0.8,0.2,1);
-}
-.asset-card-new.expanded .asset-card-details {
-  max-height: 700px;
-  transition: max-height 0.5s cubic-bezier(0.2,0.8,0.2,1);
-}
+.asset-card-details { max-height: 0; overflow: hidden; transition: max-height 0.32s cubic-bezier(0.2,0.8,0.2,1); }
+.asset-card-new.expanded .asset-card-details { max-height: 700px; transition: max-height 0.5s cubic-bezier(0.2,0.8,0.2,1); }
 
-.asset-card-details-inner {
-  padding-top: 14px;
-  border-top: 1px solid var(--ink-100);
-  margin-top: 4px;
-}
+.asset-card-details-inner { padding-top: 14px; border-top: 1px solid var(--ink-100); margin-top: 4px; }
 
-.asset-detail-row {
-  display: flex;
-  gap: 8px;
-  font-size: 12.5px;
-  margin-bottom: 8px;
-  line-height: 1.5;
-}
+.asset-detail-row { display: flex; gap: 8px; font-size: 12.5px; margin-bottom: 8px; line-height: 1.5; }
 .asset-detail-label {
-  font-weight: 600;
-  color: var(--ink-400);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: 10.5px;
-  min-width: 70px;
-  padding-top: 2px;
-  flex-shrink: 0;
+  font-weight: 600; color: var(--ink-400); text-transform: uppercase;
+  letter-spacing: 0.06em; font-size: 10.5px; min-width: 70px;
+  padding-top: 2px; flex-shrink: 0;
 }
 .asset-detail-value { color: var(--ink-700); flex: 1; }
 .asset-detail-value.owners { color: var(--ink-700); font-weight: 500; }
 
 .asset-card-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: auto;
-  padding-top: 16px;
-  border-top: 1px solid var(--ink-100);
+  display: flex; gap: 8px; margin-top: auto;
+  padding-top: 16px; border-top: 1px solid var(--ink-100);
 }
 
 .asset-expand-btn {
-  flex: 1;
-  background: var(--ink-50);
-  color: var(--ink-700);
-  border: 1px solid var(--ink-100);
-  padding: 9px 14px;
-  border-radius: var(--radius);
-  font-size: 12.5px;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  transition: all 0.18s;
+  flex: 1; background: var(--ink-50); color: var(--ink-700);
+  border: 1px solid var(--ink-100); padding: 9px 14px;
+  border-radius: var(--radius); font-size: 12.5px; font-weight: 600;
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 6px; transition: all 0.18s;
 }
-.asset-expand-btn:hover {
-  background: var(--ink-100);
-  border-color: var(--ink-300);
-}
-.asset-expand-btn .chev {
-  transition: transform 0.25s;
-}
-.asset-card-new.expanded .asset-expand-btn .chev {
-  transform: rotate(180deg);
-}
+.asset-expand-btn:hover { background: var(--ink-100); border-color: var(--ink-300); }
+.asset-expand-btn .chev { transition: transform 0.25s; }
+.asset-card-new.expanded .asset-expand-btn .chev { transform: rotate(180deg); }
 
 .asset-onepager-btn {
   flex: 1;
   background: linear-gradient(135deg, var(--accenture-purple), var(--accenture-magenta));
-  color: var(--white);
-  padding: 9px 14px;
-  border-radius: var(--radius);
-  font-size: 12.5px;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  transition: all 0.2s;
+  color: var(--white); padding: 9px 14px; border-radius: var(--radius);
+  font-size: 12.5px; font-weight: 600;
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 6px; transition: all 0.2s;
 }
-.asset-onepager-btn:hover {
-  filter: brightness(1.1);
-  box-shadow: var(--shadow-purple);
-}
-
+.asset-onepager-btn:hover { filter: brightness(1.1); box-shadow: var(--shadow-purple); }
 .asset-onepager-btn.disabled {
-  background: var(--ink-100);
-  color: var(--ink-400);
-  cursor: not-allowed;
-  filter: none;
-  box-shadow: none;
+  background: var(--ink-100); color: var(--ink-400);
+  cursor: not-allowed; filter: none; box-shadow: none;
 }
 
 .slide-count-badge {
-  display: inline-flex;
-  align-items: center;
+  display: inline-flex; align-items: center;
   background: rgba(255,255,255,0.25);
-  padding: 2px 7px;
-  border-radius: 999px;
-  font-size: 10.5px;
-  font-weight: 700;
-  margin-left: 4px;
+  padding: 2px 7px; border-radius: 999px;
+  font-size: 10.5px; font-weight: 700; margin-left: 4px;
 }
 
 .maturity-filter {
-  display: flex;
-  gap: 6px;
-  padding: 3px;
-  background: var(--ink-50);
-  border-radius: 999px;
-  border: 1px solid var(--ink-100);
+  display: flex; gap: 6px; padding: 3px;
+  background: var(--ink-50); border-radius: 999px; border: 1px solid var(--ink-100);
 }
-.maturity-filter .chip {
-  background: none;
-  border: none;
-  padding: 6px 12px;
-  font-size: 12px;
-}
-.maturity-filter .chip.active {
-  background: var(--white);
-  color: var(--ink-900);
-  box-shadow: var(--shadow-sm);
-}
+.maturity-filter .chip { background: none; border: none; padding: 6px 12px; font-size: 12px; }
+.maturity-filter .chip.active { background: var(--white); color: var(--ink-900); box-shadow: var(--shadow-sm); }
 
 
 /* ==========================================================================
-   ASSET ONE-PAGER MODAL
+   MODAL
    ========================================================================== */
 
 .modal-overlay {
-  display: none;
-  position: fixed; inset: 0;
-  background: rgba(10,10,20,0.7);
-  backdrop-filter: blur(6px);
-  z-index: 200;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
+  display: none; position: fixed; inset: 0;
+  background: rgba(10,10,20,0.7); backdrop-filter: blur(6px);
+  z-index: 200; align-items: center; justify-content: center; padding: 24px;
 }
-.modal-overlay.visible {
-  display: flex;
-  animation: overlayIn 0.2s ease-out;
-}
+.modal-overlay.visible { display: flex; animation: overlayIn 0.2s ease-out; }
 @keyframes overlayIn { from { opacity: 0; } to { opacity: 1; } }
 
 .modal {
-  background: var(--white);
-  border-radius: var(--radius-xl);
-  width: 100%;
-  max-width: 1080px;
-  max-height: calc(100vh - 48px);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  background: var(--white); border-radius: var(--radius-xl);
+  width: 100%; max-width: 1080px; max-height: calc(100vh - 48px);
+  display: flex; flex-direction: column; overflow: hidden;
   box-shadow: var(--shadow-xl);
   animation: modalIn 0.28s cubic-bezier(0.2,0.8,0.2,1);
 }
@@ -1273,255 +824,131 @@ mark {
 }
 
 .modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 22px 26px;
-  border-bottom: 1px solid var(--ink-100);
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 16px; padding: 22px 26px; border-bottom: 1px solid var(--ink-100);
 }
-
 .modal-title-block { flex: 1; }
 .modal-title {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--ink-900);
-  letter-spacing: -0.01em;
-  margin-bottom: 6px;
+  font-family: var(--font-display); font-size: 22px; font-weight: 700;
+  color: var(--ink-900); letter-spacing: -0.01em; margin-bottom: 6px;
 }
-.modal-subtitle {
-  font-size: 13px;
-  color: var(--ink-500);
-}
+.modal-subtitle { font-size: 13px; color: var(--ink-500); }
 
 .modal-close {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: var(--ink-50);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--ink-600);
-  flex-shrink: 0;
-  transition: all 0.18s;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--ink-50); display: flex; align-items: center; justify-content: center;
+  color: var(--ink-600); flex-shrink: 0; transition: all 0.18s;
 }
-.modal-close:hover {
-  background: var(--ink-100);
-  color: var(--ink-900);
-}
+.modal-close:hover { background: var(--ink-100); color: var(--ink-900); }
 
-.modal-body {
-  flex: 1;
-  overflow-y: auto;
-  padding: 24px 26px;
-  background: var(--ink-50);
-}
+.modal-body { flex: 1; overflow-y: auto; padding: 24px 26px; background: var(--ink-50); }
 
 .slide-container {
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--ink-100);
-  padding: 36px;
-  min-height: 420px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: var(--shadow-sm);
+  background: var(--white); border-radius: var(--radius-lg);
+  border: 1px solid var(--ink-100); padding: 36px; min-height: 420px;
+  display: flex; flex-direction: column; box-shadow: var(--shadow-sm);
 }
-
 .slide-content { flex: 1; }
 
 .slide-header {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 18px;
-  padding-bottom: 18px;
-  border-bottom: 2px solid var(--ink-100);
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 18px; padding-bottom: 18px; border-bottom: 2px solid var(--ink-100);
 }
-
 .slide-icon {
-  width: 48px; height: 48px;
-  border-radius: var(--radius);
+  width: 48px; height: 48px; border-radius: var(--radius);
   background: linear-gradient(135deg, var(--accenture-purple), var(--accenture-magenta));
-  color: var(--white);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
+  color: var(--white); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
-
 .slide-title {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--ink-900);
-  letter-spacing: -0.01em;
-  line-height: 1.2;
+  font-family: var(--font-display); font-size: 22px; font-weight: 700;
+  color: var(--ink-900); letter-spacing: -0.01em; line-height: 1.2;
 }
 .slide-subtitle {
-  font-size: 12px;
-  color: var(--ink-400);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 600;
-  margin-top: 4px;
+  font-size: 12px; color: var(--ink-400); text-transform: uppercase;
+  letter-spacing: 0.1em; font-weight: 600; margin-top: 4px;
 }
 
 .slide-section { margin-bottom: 18px; }
 .slide-section h4 {
-  font-family: var(--font-display);
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--accenture-purple-deep);
-  margin-bottom: 8px;
+  font-family: var(--font-display); font-size: 13px; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--accenture-purple-deep); margin-bottom: 8px;
 }
-.slide-section p {
-  font-size: 14px;
-  color: var(--ink-700);
-  line-height: 1.6;
-  margin: 0 0 8px;
-}
-.slide-section ul {
-  margin: 0; padding-left: 20px;
-  color: var(--ink-700);
-  font-size: 14px;
-  line-height: 1.65;
-}
+.slide-section p { font-size: 14px; color: var(--ink-700); line-height: 1.6; margin: 0 0 8px; }
+.slide-section ul { margin: 0; padding-left: 20px; color: var(--ink-700); font-size: 14px; line-height: 1.65; }
 .slide-section li { margin-bottom: 4px; }
 
 .slide-meta-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 14px;
-  margin-top: 18px;
-  padding-top: 18px;
-  border-top: 1px solid var(--ink-100);
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px; margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--ink-100);
 }
 .slide-meta-item { font-size: 12px; }
 .slide-meta-item .label {
-  font-weight: 700;
-  color: var(--ink-400);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 10.5px;
-  margin-bottom: 4px;
+  font-weight: 700; color: var(--ink-400); text-transform: uppercase;
+  letter-spacing: 0.08em; font-size: 10.5px; margin-bottom: 4px;
 }
-.slide-meta-item .value {
-  color: var(--ink-800);
-  font-size: 13px;
-}
+.slide-meta-item .value { color: var(--ink-800); font-size: 13px; }
 
 .modal-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 26px;
-  border-top: 1px solid var(--ink-100);
-  background: var(--white);
-  gap: 12px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 26px; border-top: 1px solid var(--ink-100);
+  background: var(--white); gap: 12px;
 }
-
-.slide-nav {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
+.slide-nav { display: flex; align-items: center; gap: 12px; }
 .slide-nav-btn {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: var(--ink-50);
-  border: 1px solid var(--ink-100);
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--ink-50); border: 1px solid var(--ink-100);
   display: flex; align-items: center; justify-content: center;
-  color: var(--ink-600);
-  transition: all 0.18s;
+  color: var(--ink-600); transition: all 0.18s;
 }
-.slide-nav-btn:hover:not(:disabled) {
-  background: var(--ink-900);
-  color: var(--white);
-  border-color: var(--ink-900);
-}
-.slide-nav-btn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
+.slide-nav-btn:hover:not(:disabled) { background: var(--ink-900); color: var(--white); border-color: var(--ink-900); }
+.slide-nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 
-.slide-pagination {
-  display: flex;
-  gap: 6px;
-}
+.slide-pagination { display: flex; gap: 6px; }
 .slide-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--ink-200);
-  transition: all 0.18s;
-  border: none;
-  padding: 0;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--ink-200); transition: all 0.18s; border: none; padding: 0;
 }
-.slide-dot.active {
-  background: var(--accenture-purple);
-  transform: scale(1.3);
-}
+.slide-dot.active { background: var(--accenture-purple); transform: scale(1.3); }
 
-.slide-counter {
-  font-size: 12.5px;
-  color: var(--ink-500);
-  font-weight: 500;
-}
+.slide-counter { font-size: 12.5px; color: var(--ink-500); font-weight: 500; }
 .slide-counter strong { color: var(--ink-900); font-weight: 700; }
 
 
 /* ==========================================================================
-   PLACEHOLDER / ERROR STATES
+   PLACEHOLDER / ERROR
    ========================================================================== */
 
 .placeholder {
-  background: var(--white);
-  border: 2px dashed var(--ink-200);
-  border-radius: var(--radius-lg);
-  padding: 60px 40px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
+  background: var(--white); border: 2px dashed var(--ink-200);
+  border-radius: var(--radius-lg); padding: 60px 40px; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
 }
 .placeholder-icon {
-  width: 56px; height: 56px;
-  border-radius: 50%;
-  background: var(--ink-50);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--ink-400);
-  margin-bottom: 4px;
+  width: 56px; height: 56px; border-radius: 50%; background: var(--ink-50);
+  display: flex; align-items: center; justify-content: center; color: var(--ink-400); margin-bottom: 4px;
 }
 .placeholder-title { font-size: 18px; color: var(--ink-700); }
-.placeholder-text {
-  font-size: 14px;
-  color: var(--ink-500);
-  max-width: 420px;
-  line-height: 1.5;
-  margin-bottom: 12px;
-}
-
-.error-state {
-  background: rgba(224,48,30,0.04);
-  border: 1px solid rgba(224,48,30,0.2);
-  border-radius: var(--radius-lg);
-  padding: 18px 22px;
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-}
-.error-icon { color: var(--danger); flex-shrink: 0; margin-top: 1px; }
-.error-title { font-weight: 700; font-size: 14px; color: var(--danger); margin-bottom: 2px; }
-.error-msg { font-size: 13px; color: var(--ink-600); line-height: 1.5; }
+.placeholder-text { font-size: 14px; color: var(--ink-500); max-width: 420px; line-height: 1.5; margin-bottom: 12px; }
 
 
 /* ==========================================================================
-   EXTERNAL MODE — hide internal-only content
+   EXTERNAL MODE — hide sensitive data
    ========================================================================== */
 
-body.external-mode .internal-only {
-  display: none !important;
+body.external-mode .internal-only { display: none !important; }
+body.external-mode .asset-onepager-btn { display: none !important; }
+body.external-mode .asset-card-actions { justify-content: stretch; }
+body.external-mode .asset-expand-btn { flex: 1; }
+body.external-mode .slide-meta-item.owners-meta { display: none !important; }
+body.external-mode .submit-accelerator-btn { display: none !important; }
+
+.ext-banner {
+  display: none;
+  background: linear-gradient(90deg, var(--accenture-purple), var(--accenture-magenta));
+  color: var(--white); text-align: center; padding: 8px 16px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
 }
+body.external-mode .ext-banner { display: block; }
 
 
 /* ==========================================================================
@@ -1529,32 +956,17 @@ body.external-mode .internal-only {
    ========================================================================== */
 
 .footer {
-  background: var(--accenture-deep-bg);
-  color: var(--accenture-purple-pale);
-  padding: 36px 32px;
-  margin-top: 48px;
+  background: var(--ink-900); color: var(--ink-300);
+  padding: 36px 32px; margin-top: 48px; border-top: 1px solid var(--ink-700);
 }
 .footer-inner {
-  max-width: 1440px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
+  max-width: 1440px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px;
 }
-.footer-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 13px;
-}
+.footer-left { display: flex; align-items: center; gap: 12px; font-size: 13px; }
 .footer-left .brand-logo { font-size: 22px; }
-.footer a {
-  color: var(--accenture-purple-wash);
-  font-size: 13px;
-  margin-left: 18px;
-}
+.footer a { color: var(--accenture-purple-pale); font-size: 13px; margin-left: 18px; }
 .footer a:hover { color: var(--white); }
 
 
@@ -1564,30 +976,27 @@ body.external-mode .internal-only {
 
 @media (max-width: 1024px) {
   .page { padding: 24px; }
-  .section-title { font-size: 30px; }
+  .hero { padding: 48px 24px 44px; }
+  .hero-title { font-size: 34px; }
   .sector-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
   .asset-grid-new { grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
-  .hero-grid { grid-template-columns: 1fr; }
-  .hero-visual { height: 200px; }
-  .hero-mark { font-size: 160px; }
-  .hero-title { font-size: 38px; }
 }
 
 @media (max-width: 720px) {
   .page { padding: 16px; }
-  .section-title { font-size: 26px; }
-  .modal { max-height: calc(100vh - 16px); }
-  .modal-overlay { padding: 8px; }
-  .slide-container { padding: 22px; min-height: 360px; }
+  .hero { padding: 36px 16px 32px; }
+  .hero-title { font-size: 28px; }
+  .hero-stats { gap: 20px; }
+  .hero-stat-num { font-size: 28px; }
   .topnav-inner { padding: 0 16px; gap: 12px; }
   .brand-divider { display: none; }
   .brand-product { display: none; }
-  .hero { padding: 32px 24px; }
-  .hero-grid { gap: 24px; }
-  .hero-title { font-size: 32px; }
-  .hero-visual { display: none; }
-  .hero-stats { flex-wrap: wrap; gap: 20px; }
-  .mode-toggle { margin-left: auto; }
+  .mode-pill { padding: 5px 10px; font-size: 11px; }
+  .modal { max-height: calc(100vh - 16px); }
+  .modal-overlay { padding: 8px; }
+  .slide-container { padding: 22px; min-height: 360px; }
+  .asset-detail-nav { flex-wrap: wrap; gap: 10px; }
+  .asset-detail-breadcrumb-counts { display: none; }
 }
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
@@ -1595,12 +1004,10 @@ body.external-mode .internal-only {
 ::-webkit-scrollbar-thumb { background: var(--ink-200); border-radius: 999px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--ink-300); }
 
-
 @keyframes cardIn {
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes panelSlide {
   from { opacity: 0; transform: translateX(-8px); }
   to   { opacity: 1; transform: translateX(0); }
@@ -1619,85 +1026,67 @@ body.external-mode .internal-only {
 
 <a href="#section-assets" class="skip-link">Skip to content</a>
 
-<!-- DARK NAVBAR -->
+<!-- EXTERNAL MODE BANNER -->
+<div class="ext-banner" aria-live="polite">External demo mode — sensitive information is hidden</div>
+
+<!-- DARK HEADER -->
 <header class="topnav">
   <div class="topnav-inner">
-    <a href="#" class="brand" aria-label="UKI Sustainability Hub">
-      <span class="brand-logo">&gt; accenture</span>
+    <a href="#" class="brand" aria-label="EMEA Sustainability">
+      <span class="brand-logo">&gt;</span>
+      <span>accenture</span>
       <span class="brand-divider"></span>
-      <span class="brand-product">UKI Sustainability Hub</span>
+      <span class="brand-product">EMEA Sustainability &middot; Asset Library</span>
     </a>
-    <span class="nav-spacer"></span>
-    <div class="mode-toggle" id="modeToggle" role="radiogroup" aria-label="View mode">
-      <button class="mode-pill active" id="modeInternal" role="radio" aria-checked="true" type="button">
-        <span class="dot"></span>
-        Internal
+    <div class="nav-spacer"></div>
+    <div class="mode-toggle" role="radiogroup" aria-label="View mode">
+      <button class="mode-pill int active" id="modeInternal" role="radio" aria-checked="true" type="button">
+        <span class="dot"></span> Internal
       </button>
-      <button class="mode-pill" id="modeExternal" role="radio" aria-checked="false" type="button">
-        <span class="dot"></span>
-        External
+      <button class="mode-pill ext" id="modeExternal" role="radio" aria-checked="false" type="button">
+        <span class="dot"></span> External
       </button>
     </div>
   </div>
 </header>
 
 <!-- DARK HERO -->
-<div class="page" style="padding-bottom: 0;">
-  <section class="hero" id="heroSection">
-    <div class="hero-grid">
-      <div class="hero-content">
-        <div class="hero-eyebrow">
-          <span class="pulse"></span>
-          Sustainability AI Suite
-        </div>
-        <h1 class="hero-title"><span class="accent">AI</span> Accelerator &amp; Asset Library</h1>
-        <p class="hero-subtitle">
-          28 production-grade sustainability AI accelerators from across the global practice &mdash;
-          organised by sector, with maturity labels, owners, and full one-pager decks where available.
-        </p>
-        <div class="hero-search">
-          <input type="text" class="hero-search-input" id="heroSearchInput" placeholder="Search across all 28 accelerators&hellip;" aria-label="Search all accelerators" autocomplete="off">
-          <button class="hero-search-btn" id="heroSearchBtn" aria-label="Search" type="button">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
-          </button>
-        </div>
-        <div class="hero-stats" id="heroStats">
-          <div>
-            <div class="hero-stat-num">28</div>
-            <div class="hero-stat-label">Accelerators</div>
-          </div>
-          <div>
-            <div class="hero-stat-num">5</div>
-            <div class="hero-stat-label">Sectors</div>
-          </div>
-          <div>
-            <div class="hero-stat-num" id="heroStatProven">4</div>
-            <div class="hero-stat-label">Client-proven</div>
-          </div>
-          <div>
-            <div class="hero-stat-num" id="heroStatReady">7</div>
-            <div class="hero-stat-label">Client-ready</div>
-          </div>
-          <div>
-            <div class="hero-stat-num" id="heroStatMvp">17</div>
-            <div class="hero-stat-label">MVP</div>
-          </div>
-        </div>
+<section class="hero" id="heroSection">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Sustainability AI Suite</div>
+    <h1 class="hero-title">AI Accelerator &amp; Asset Library</h1>
+    <p class="hero-subtitle">
+      28 production-grade sustainability AI accelerators from across the global practice &mdash;
+      organised by sector, with maturity labels, owners, and full one-pager decks where available.
+    </p>
+    <div class="hero-stats" id="heroStats">
+      <div class="hero-stat">
+        <span class="hero-stat-num" id="statTotal">28</span>
+        <span class="hero-stat-label">Accelerators</span>
       </div>
-      <div class="hero-visual" aria-hidden="true">
-        <div class="hero-mark">&gt;</div>
-        <div class="hero-mark-orbit">
-          <div class="hero-mark-dot"></div>
-        </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num" id="statSectors">5</span>
+        <span class="hero-stat-label">Sectors</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num" id="statProven">5</span>
+        <span class="hero-stat-label">Client-proven</span>
       </div>
     </div>
-  </section>
-</div>
+    <div class="hero-search" id="heroSearchWrap">
+      <span class="hero-search-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path>
+        </svg>
+      </span>
+      <input type="text" id="heroSearch" placeholder="Search across all accelerators&hellip;" aria-label="Search all accelerators" autocomplete="off">
+    </div>
+  </div>
+</section>
 
-<!-- PAGE BODY (light background) -->
-<main class="page" style="padding-top: 0;">
+<!-- PAGE BODY -->
+<main class="page">
   <section class="page-section" id="section-assets" role="region" aria-label="Asset Library">
-
     <div class="asset-toolbar hidden" id="assetToolbar">
       <div class="asset-search">
         <span class="asset-search-icon" aria-hidden="true">
@@ -1713,7 +1102,6 @@ body.external-mode .internal-only {
       </div>
       <div class="asset-results-count" id="assetResultsCount" aria-live="polite"></div>
     </div>
-
     <div id="assetsContainer"></div>
   </section>
 </main>
@@ -1750,7 +1138,7 @@ body.external-mode .internal-only {
   <div class="footer-inner">
     <div class="footer-left">
       <span class="brand-logo">&gt;</span>
-      <span>UKI Sustainability Hub &middot; Internal &middot; Accenture</span>
+      <span id="footerLabel">EMEA Sustainability &middot; Internal &middot; Accenture</span>
     </div>
     <div>
       <a href="#" id="footerSiteLink" target="_blank" rel="noopener">SharePoint site</a>
@@ -1765,94 +1153,68 @@ const SP_SITE = 'https://accenture.sharepoint.com/sites/UKISustainabilityHub';
 const LISTS = { assets: 'AI Hub - Assets' };
 const LINK_TARGET = (window.self !== window.top) ? '_top' : '_blank';
 
-
 /* ---- STATE -------------------------------------------------------------- */
 const state = {
-  filters: {
-    assetMaturity: 'all',
-    assetQuery: ''
-  },
+  filters: { assetMaturity: 'all', assetQuery: '' },
   modal: { asset: null, slideIndex: 0 },
   activeSector: null,
-  viewMode: 'internal'  // 'internal' or 'external'
+  viewMode: 'internal'
 };
 
 const ICON = {
-  arrow:    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"></path></svg>',
-  external: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path></svg>',
-  doc:      '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>',
-  alert:    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>',
-  empty:    '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M2 10h20"></path></svg>',
-  cloud:    '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19a4.5 4.5 0 1 0 0-9 7 7 0 1 0-13 4 4 4 0 0 0 4 4z"></path></svg>',
-  chevron:  '<svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>'
+  arrow:   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"></path></svg>',
+  chevron: '<svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>'
 };
 
 const SECTOR_META = {
-  'ESG Intelligence':                      { key: 'esg',         icon: 'esg',
-    description: 'Disclosure, materiality, benchmarking and controls accelerators across CSRD, ESRS and ESG ratings.' },
-  'Net Zero Transition':                   { key: 'netzero',     icon: 'netzero',
-    description: 'Decarbonisation accelerators across emissions measurement, supplier strategy, low-carbon investments and net-zero steering.' },
-  'Sustainable Value Chains, Sustainable & Circular Products': { key: 'value-chain', icon: 'value-chain', shortLabel: 'Sustainable Value Chains & Circular Products',
-    description: 'Product design, packaging, raw materials and circularity accelerators for portfolio and supply-chain transformation.' },
-  'Nature & Biodiversity':                 { key: 'nature',      icon: 'nature',
-    description: 'Nature impact, dependency and TNFD-aligned risk accelerators for biodiversity reporting.' },
-  'Operating Model':                       { key: 'operating',   icon: 'operating',
-    description: 'Process design, AI enablement and operating-model accelerators for the sustainability function itself.' }
+  'ESG Intelligence':                      { key: 'esg', icon: 'esg', description: 'Disclosure, materiality, benchmarking and controls accelerators across CSRD, ESRS and ESG ratings.' },
+  'Net Zero Transition':                   { key: 'netzero', icon: 'netzero', description: 'Decarbonisation accelerators across emissions measurement, supplier strategy, low-carbon investments and net-zero steering.' },
+  'Sustainable Value Chains, Sustainable & Circular Products': { key: 'value-chain', icon: 'value-chain', shortLabel: 'Sustainable Value Chains & Circular Products', description: 'Product design, packaging, raw materials and circularity accelerators for portfolio and supply-chain transformation.' },
+  'Nature & Biodiversity':                 { key: 'nature', icon: 'nature', description: 'Nature impact, dependency and TNFD-aligned risk accelerators for biodiversity reporting.' },
+  'Operating Model':                       { key: 'operating', icon: 'operating', description: 'Process design, AI enablement and operating-model accelerators for the sustainability function itself.' }
 };
 
 const SECTOR_ICON_SVG = {
-  esg:         '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4"></path><path d="M21 12c0 5-4.5 9-9 9s-9-4-9-9 4.5-9 9-9c1 0 2 0.1 3 0.4"></path></svg>',
-  netzero:     '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17h18"></path><path d="M3 12h18"></path><path d="M3 7h18"></path><path d="M7 3v18"></path></svg>',
-  'value-chain':'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>',
-  nature:      '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6"></path></svg>',
-  operating:   '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>'
+  esg:         '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"></path><path d="M21 12c0 5-4.5 9-9 9s-9-4-9-9 4.5-9 9-9c1 0 2 0.1 3 0.4"></path></svg>',
+  netzero:     '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h18"></path><path d="M3 12h18"></path><path d="M3 7h18"></path><path d="M7 3v18"></path></svg>',
+  'value-chain':'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>',
+  nature:      '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6"></path></svg>',
+  operating:   '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>'
 };
 
-
 /* ==========================================================================
-   ASSET LIBRARY DATA — Sustainability AI Suite (28 accelerators)
+   ASSET DATA — 28 accelerators
    ========================================================================== */
-
 const ASSET_DATA = [
-  // ==== ESG INTELLIGENCE ====
-  { Asset_Name: 'CSRD Insights.ai', Sector: 'ESG Intelligence', Maturity: 'Client-proven', Owners: 'John Prendergast', Summary: 'Agentic benchmarking solution that extracts, scores and compares ESG disclosures across selected peer groups to generate rapid performance insights.', Details: 'CSRD Insights.ai uses a coordinated set of AI agents to ingest peer ESRS disclosures, normalise and score them against a chosen benchmarking framework, and surface comparative insights to clients within hours rather than weeks.', AI_Tooling: 'Multi-agent orchestration · Document extraction (RAG) · LLM-based scoring · Custom benchmarking engine', Has_OnePager: true, Slides: [{ title: 'CSRD Insights.ai', subtitle: 'Agentic ESG Benchmarking Accelerator', sections: [{ heading: 'Client challenge', body: 'CSRD readiness requires comparing a company\'s disclosures against peers, but manual benchmarking takes weeks per peer set and is hard to keep current as regulations evolve.' },{ heading: 'Our solution', body: 'An agentic benchmarking pipeline that ingests peer disclosures, scores them against a chosen ESRS framework, and produces comparative insight decks ready for client review.' },{ heading: 'Capabilities', list: ['Automated peer disclosure extraction','Scoring against custom ESRS / ESG frameworks','Side-by-side comparison views','Insight narrative generation'] },{ heading: 'Outcomes', body: 'Reduces benchmarking effort by 70%+ and enables practice teams to refresh peer benchmarks on demand.' }] }] },
-  { Asset_Name: 'IRO.ai', Sector: 'ESG Intelligence', Maturity: 'Client-proven', Owners: 'John Prendergast', Summary: 'AI-supported double materiality accelerator combining internal and external client information to generate IROs and draft scoring for expert validation.', Details: 'IRO.ai supports the Impact, Risk and Opportunity (IRO) identification step of the double materiality assessment.', AI_Tooling: 'RAG over client + external sources · Materiality scoring agents · Rationale generation', Has_OnePager: true, Slides: [{ title: 'IRO.ai', subtitle: 'Double Materiality IRO Accelerator', sections: [{ heading: 'Client challenge', body: 'Identifying impacts, risks and opportunities for double materiality is research-heavy and consultant time-intensive.' },{ heading: 'Our solution', body: 'An AI accelerator that combines internal client data and external market/regulatory signals to generate a draft IRO long-list with scoring rationale, ready for expert validation.' },{ heading: 'Capabilities', list: ['Internal + external evidence harvesting','Draft IRO long-list generation','Scoring rationale per IRO','Expert review workflow'] },{ heading: 'Outcomes', body: 'Cuts IRO identification effort while improving completeness.' }] }] },
-  { Asset_Name: 'ICoSR.ai', Sector: 'ESG Intelligence', Maturity: 'Client-proven', Owners: 'John Prendergast', Summary: 'Risk-based controls scoping solution using GenAI to tier, map and scope disclosures with the right level of control detail.', Details: 'ICoSR.ai (Internal Controls over Sustainability Reporting) helps clients design proportionate control frameworks for sustainability data points.', AI_Tooling: 'Risk tiering models · Control mapping LLMs · Gap analysis pipeline', Has_OnePager: true, Slides: [{ title: 'ICoSR.ai', subtitle: 'Internal Controls over Sustainability Reporting', sections: [{ heading: 'Client challenge', body: 'CSRD limited assurance and future reasonable assurance require robust internal controls over sustainability data.' },{ heading: 'Our solution', body: 'A risk-based controls scoping accelerator that uses GenAI to tier disclosures, map to existing controls, and recommend new ones where needed.' },{ heading: 'Capabilities', list: ['Disclosure-by-disclosure risk tiering','Mapping to existing control frameworks','Gap identification','Proportionate control recommendations'] },{ heading: 'Outcomes', body: 'Faster controls design with audit-ready rationale.' }] }] },
-  { Asset_Name: 'ESGen.AI CSRD Reporting Accelerator', Sector: 'ESG Intelligence', Maturity: 'Client-proven', Owners: 'John Prendergast', Summary: 'Report-writing accelerator using prior reports, policies, datasets and CSRD expertise to generate CSRD-ready reports and gap assessments.', Details: 'ESGen.AI combines a client\'s prior sustainability reports, policies, raw data and Accenture\'s CSRD expertise to draft CSRD-ready reports and identify gaps.', AI_Tooling: 'RAG over client policies + reports · Section generation agents · ESRS gap detection', Has_OnePager: true, Slides: [{ title: 'ESGen.AI CSRD Reporting Accelerator', subtitle: 'End-to-end CSRD reporting in weeks, not months', sections: [{ heading: 'Client challenge', body: 'Writing a first CSRD report is a 6–12 month effort across dozens of consultants.' },{ heading: 'Our solution', body: 'An accelerator that ingests prior reports, policies and raw data, then drafts CSRD-aligned report sections ready for expert review.' },{ heading: 'Capabilities', list: ['Multi-source ingestion (reports, policies, datasets)','Section drafting against ESRS structure','Gap assessment vs. CSRD requirements','Editing and review workflow integration'] },{ heading: 'Outcomes', body: 'Cuts report drafting time by 50–70% while improving CSRD alignment and consistency.' }] }] },
-  { Asset_Name: 'EmpCo Risk Checker', Sector: 'ESG Intelligence', Maturity: 'Client-ready', Owners: 'Jane Ehlers, Sabrina Fröhlich-Schiffer, Jessica Schallock, Rike Nickell, Heike Steiner', Summary: 'AI-powered sustainability claims risk checker assessing statements against EmpCo (Empowering Consumers) directive criteria.', Details: 'The EmpCo Risk Checker scans marketing copy, packaging text and product communications for sustainability claims, then evaluates each against the EU EmpCo Directive criteria.', AI_Tooling: 'Claim extraction NLP · Regulation-aligned scoring · Rewrite suggestions', Has_OnePager: true, Slides: [{ title: 'EmpCo Risk Checker', subtitle: 'Sustainability claims compliance accelerator', sections: [{ heading: 'Client challenge', body: 'The EU EmpCo Directive sharply restricts sustainability claims in consumer-facing communications.' },{ heading: 'Our solution', body: 'An AI risk checker that scans copy, identifies sustainability claims, and scores each against EmpCo criteria with rewrite suggestions.' },{ heading: 'Capabilities', list: ['Bulk claim extraction across copy/packaging','EmpCo criteria scoring','Risk levelling (red/amber/green)','Audit trail and rewrite suggestions'] },{ heading: 'Outcomes', body: 'Allows brand and legal teams to triage thousands of claims in hours.' }] }] },
-  { Asset_Name: 'ESG Forms Filler', Sector: 'ESG Intelligence', Maturity: 'Client-ready', Owners: 'Hiba Buras, Paul-Eloi Esclattier, Jean-Baptiste Alario', Summary: 'AI assistant for ESG questionnaires, ratings submissions and sustainability forms with source-backed responses.', Details: 'ESG Forms Filler ingests CDP, EcoVadis, S&P Global and similar ESG questionnaires, then drafts responses pulled from a client\'s prior submissions, policies and datasets.', AI_Tooling: 'RAG over prior submissions · Citation-required response generation · Multi-questionnaire templates', Has_OnePager: true, Slides: [{ title: 'ESG Forms Filler — Overview', subtitle: 'AI-powered ESG questionnaire assistant', sections: [{ heading: 'Client challenge', body: 'Clients face dozens of ESG ratings questionnaires every year — each takes 100+ hours and the responses must be consistent.' },{ heading: 'Our solution', body: 'An AI assistant that drafts answers from prior submissions, policies and ESG datasets, with citations back to source documents.' },{ heading: 'Capabilities', list: ['Pre-loaded major ESG questionnaire templates','Source-backed response generation','Consistency checks across forms','Reviewer collaboration workflow'] }] },{ title: 'ESG Forms Filler — How it works', subtitle: 'From upload to first draft in under an hour', sections: [{ heading: 'Workflow', body: 'Upload prior submissions and current policies. Select the target questionnaire. The system drafts responses with citations, which are then routed for review.' },{ heading: 'Source backing', body: 'Every generated response includes one or more citations to the source document, paragraph and date.' },{ heading: 'Outcomes', body: 'Cuts questionnaire response time by 60–80%; gives clients a single source of truth for sustainability statements across submissions.' }] }] },
-  { Asset_Name: 'ReputAI', Sector: 'ESG Intelligence', Maturity: 'Client-ready', Owners: 'Ashish Verma', Summary: 'GenAI-powered ESDD screening solution using workflow, research and browser agents to assess sustainability KPIs from documents and public sources.', Details: 'ReputAI accelerates Environmental and Social Due Diligence (ESDD) by orchestrating workflow, research and browser-based agents to screen targets across sustainability KPIs.', AI_Tooling: 'Multi-agent (workflow + research + browser agents) · Sustainability KPI scoring · Public-source ingestion', Has_OnePager: true, Slides: [{ title: 'ReputAI — ESDD Accelerator', subtitle: 'AI screening for Environmental & Social Due Diligence', sections: [{ heading: 'Client challenge', body: 'M&A and investment teams need fast, repeatable sustainability due diligence.' },{ heading: 'Our solution', body: 'A GenAI-powered screening solution that uses orchestrated agents to assess targets across sustainability KPIs from documents and public sources.' },{ heading: 'Capabilities', list: ['Browser agents for public-source research','Workflow agents for KPI scoring','Research agents for VDR document analysis','Configurable KPI frameworks'] }] },{ title: 'ReputAI — Outcomes', subtitle: 'From weeks to days', sections: [{ heading: 'Speed', body: 'Initial sustainability screening reports delivered in 2–3 days vs. 2–3 weeks traditionally.' },{ heading: 'Coverage', body: 'Broader KPI coverage with consistent scoring across deal pipeline.' },{ heading: 'Audit trail', body: 'Every score is traceable to the underlying evidence.' }] }] },
-  { Asset_Name: 'RegNav', Sector: 'ESG Intelligence', Maturity: 'Client-ready', Owners: 'Anais Schad', Summary: 'AI-enabled regulatory navigator translating sustainability regulation into client-specific actions.', Details: 'RegNav scans evolving sustainability regulation across EU, UK and global jurisdictions, mapping each requirement to the affected client function and translating it into a prioritised action list.', AI_Tooling: 'Regulatory text ingestion · Client-specific mapping LLMs · Continuous monitoring', Has_OnePager: true, Slides: [{ title: 'RegNav', subtitle: 'Sustainability regulatory navigator', sections: [{ heading: 'Client challenge', body: 'Sustainability regulation is fragmenting and accelerating. Clients struggle to know which requirements apply to them.' },{ heading: 'Our solution', body: 'An AI navigator that ingests regulatory text, maps it to the client\'s footprint and functions, and translates it into prioritised actions.' },{ heading: 'Capabilities', list: ['EU + UK + global regulation coverage','Client-specific applicability mapping','Action prioritisation','Continuous monitoring of changes'] },{ heading: 'Outcomes', body: 'Clients move from reactive to proactive regulatory posture.' }] }] },
-  { Asset_Name: 'AI-powered Sustainability Reporting', Sector: 'ESG Intelligence', Maturity: 'Client-ready', Owners: 'Florian Funk, Jessica Schallock', Summary: 'Multi-agent sustainability reporting accelerator supporting CSRD, GRI, KPI consistency, editing and compliance workflows.', Details: 'A modular multi-agent reporting accelerator. Agents handle data ingestion, KPI calculation, narrative drafting, cross-framework consistency checks and reviewer workflows in parallel.', AI_Tooling: 'Multi-agent orchestration · Cross-framework KPI consistency · Editing assistant agents', Has_OnePager: true, Slides: [{ title: 'AI-powered Sustainability Reporting — Architecture', subtitle: 'Multi-agent reporting accelerator', sections: [{ heading: 'Client challenge', body: 'Sustainability reporting now spans CSRD, GRI, SASB, TCFD, ISSB and dozens of voluntary frameworks.' },{ heading: 'Architecture', body: 'A coordinated set of specialised agents — ingestion, calculation, drafting, consistency, editing — with a central orchestrator.' },{ heading: 'Capabilities', list: ['Multi-framework support','KPI consistency engine','Narrative drafting agents','Editing and review automation'] }] },{ title: 'AI-powered Sustainability Reporting — Use cases', subtitle: 'From annual report to executive briefing', sections: [{ heading: 'Annual reporting', body: 'Drafts CSRD/GRI sections from raw data with built-in consistency checks.' },{ heading: 'Interim updates', body: 'Quick-turn quarterly updates and executive briefings.' },{ heading: 'Cross-framework mapping', body: 'Single data model serving multiple framework outputs.' },{ heading: 'Outcomes', body: 'Cuts reporting cycle time by 40–60%; reduces inconsistencies between framework submissions.' }] }] },
-
-  // ==== NATURE & BIODIVERSITY ====
-  { Asset_Name: 'Nature VC', Sector: 'Nature & Biodiversity', Maturity: 'Client-ready', Owners: 'Barnabas Harrison', Summary: 'AI-powered nature maturity assessment generating hypotheses on nature impacts, dependencies and TNFD-related risks.', Details: 'Nature VC assesses a client\'s nature maturity by ingesting operational, supply chain and location data, then generates AI-driven hypotheses on nature impacts, dependencies and TNFD-aligned risks.', AI_Tooling: 'Geospatial nature risk models · Supply-chain dependency mapping · TNFD-aligned hypothesis generation', Has_OnePager: true, Slides: [{ title: 'Nature VC', subtitle: 'AI nature maturity assessment', sections: [{ heading: 'Client challenge', body: 'TNFD adoption is accelerating, but most clients don\'t know where their material nature impacts and dependencies sit.' },{ heading: 'Our solution', body: 'An AI accelerator that generates initial nature impact, dependency and risk hypotheses from operational and supply chain data.' },{ heading: 'Capabilities', list: ['Geospatial impact mapping','Supply-chain dependency analysis','TNFD-aligned risk hypotheses','Maturity scoring'] },{ heading: 'Outcomes', body: 'Lets clients begin TNFD work on day 1 with concrete hypotheses to validate.' }] }] },
-
-  // ==== NET ZERO TRANSITION ====
-  { Asset_Name: 'Anti Greenwash AI', Sector: 'Net Zero Transition', Maturity: 'Client-ready', Owners: 'Tim Callaghan', Summary: 'GenAI-powered anti-greenwashing solution identifying sustainability claims and testing them against regulatory criteria.', Details: 'Anti Greenwash AI scans client sustainability communications, extracts every sustainability claim, and tests each against UK CMA, EU EmpCo, ASA and other anti-greenwashing regimes.', AI_Tooling: 'Claim extraction · Multi-jurisdiction regulatory checks · Risk rating', Has_OnePager: true, Slides: [{ title: 'Anti Greenwash AI', subtitle: 'GenAI anti-greenwashing solution', sections: [{ heading: 'Client challenge', body: 'Anti-greenwashing enforcement is sharply increasing across UK and EU.' },{ heading: 'Our solution', body: 'A GenAI scanner that extracts sustainability claims and tests them against multi-jurisdiction regulatory criteria.' },{ heading: 'Capabilities', list: ['UK CMA, EU EmpCo, ASA coverage','Bulk claims extraction','Risk-rated recommendations','Audit trail per claim'] },{ heading: 'Outcomes', body: 'Reduces greenwashing exposure across hundreds of communications in hours.' }] }] },
-  { Asset_Name: 'AI CO2 Calculator', Sector: 'Net Zero Transition', Maturity: 'MVP', Owners: 'Vishal Jain', Summary: 'AI sustainability calculator measuring carbon, energy, water and time impact of AI prompts and workflows.', Details: 'A meta-tool that quantifies the environmental cost of AI usage itself.', AI_Tooling: 'Per-token energy modelling · Cloud carbon-intensity factors · Prompt-level analytics', Has_OnePager: true, Slides: [{ title: 'AI CO2 Calculator', subtitle: 'Measuring the footprint of AI use', sections: [{ heading: 'Premise', body: 'GenAI itself has a non-trivial carbon, energy and water footprint.' },{ heading: 'Our solution', body: 'A calculator that quantifies the environmental cost per prompt and per workflow across major LLM providers.' },{ heading: 'Capabilities', list: ['Per-prompt carbon / energy / water','Workflow-level aggregation','Provider comparison','Reduction recommendations'] },{ heading: 'Outcomes', body: 'Practice teams quantify and report their own AI footprint.' }] }] },
-  { Asset_Name: 'SBTi Supplier Target Scanner', Sector: 'Net Zero Transition', Maturity: 'MVP', Owners: 'Jonas Kreyenkamp', Summary: 'Automated supplier climate target screening workflow identifying SBTi- and Paris-aligned commitments.', Details: 'Scans entire supplier portfolios to identify which suppliers have set SBTi-validated or Paris-aligned climate targets.', AI_Tooling: 'Supplier identification · SBTi database matching · Target text parsing', Has_OnePager: true, Slides: [{ title: 'SBTi Supplier Target Scanner', subtitle: 'Scope 3 supplier climate maturity screening', sections: [{ heading: 'Client challenge', body: 'Effective Scope 3 strategy requires knowing which suppliers have credible climate targets.' },{ heading: 'Our solution', body: 'An automated scanner that screens entire supplier portfolios against SBTi and Paris-aligned commitments.' },{ heading: 'Capabilities', list: ['Bulk supplier identification','SBTi-validated commitment matching','Target text parsing','Gap heatmaps by spend / category'] },{ heading: 'Outcomes', body: 'Produces a portfolio-level supplier climate maturity view in days.' }] }] },
-  { Asset_Name: 'Low Carbon Fuel Pre-Feasibility Agent', Sector: 'Net Zero Transition', Maturity: 'MVP', Owners: 'Sayyed Gulzaib Miyan, Alpesh Sosa, Akash Som Gupta', Summary: 'Agentic decision intelligence solution for rapid low-carbon product feasibility assessment.', Details: 'Multi-agent decision intelligence accelerator for assessing low-carbon fuel investment opportunities across policy, cost and market factors.', AI_Tooling: 'Multi-agent decision intelligence · Policy + market signal aggregation · TEA modelling', Has_OnePager: true, Slides: [{ title: 'Low Carbon Fuel Pre-Feasibility Agent', subtitle: 'Agentic decision intelligence for energy transition', sections: [{ heading: 'Client challenge', body: 'Energy companies face dozens of low-carbon fuel opportunities — each requires extensive pre-feasibility work.' },{ heading: 'Our solution', body: 'A multi-agent decision intelligence solution that assesses opportunities across policy, cost, technology and market dimensions in days.' }] },{ title: 'Architecture', subtitle: 'How the agents work together', sections: [{ heading: 'Specialised agents', list: ['Policy intelligence agent','Technology readiness agent','Cost / TEA modelling agent','Market sizing agent','Competitive landscape agent'] },{ heading: 'Coordination', body: 'A central orchestrator runs agents in parallel, resolves conflicts, and synthesises findings into a pre-feasibility report.' }] },{ title: 'Outcomes', subtitle: 'Days, not months', sections: [{ heading: 'Speed', body: '5–10x faster pre-feasibility cycles.' },{ heading: 'Quality', body: 'Consistent methodology across opportunities; auditable evidence trail.' },{ heading: 'Decision support', body: 'Outputs designed for direct use in investment committee briefings.' }] }] },
-  { Asset_Name: 'Carbon Steering Dashboard', Sector: 'Net Zero Transition', Maturity: 'MVP', Owners: 'Luisa Bischoff, Claudia Daniel', Summary: 'Executive dashboard consolidating emissions, reduction initiatives and net-zero progress into one management view.', Details: 'A live executive dashboard that consolidates emissions data, reduction initiative status, capex commitments and net-zero progress into a single management view.', AI_Tooling: 'Data integration · Anomaly detection · Initiative impact forecasting', Has_OnePager: true, Slides: [{ title: 'Carbon Steering Dashboard', subtitle: 'Executive net-zero management cockpit', sections: [{ heading: 'Client challenge', body: 'Executives running net-zero programmes lack a single live view linking emissions, initiatives, capex and progress.' },{ heading: 'Our solution', body: 'A consolidating dashboard with AI-driven anomaly detection and initiative impact forecasting.' },{ heading: 'Capabilities', list: ['Live emissions data integration','Initiative status tracking','Anomaly alerts','Forward-looking impact forecasts'] },{ heading: 'Outcomes', body: 'Executive committees move from quarterly reviews to live steering.' }] }] },
-  { Asset_Name: 'Carbon Time Arbitrage Agent', Sector: 'Net Zero Transition', Maturity: 'MVP', Owners: 'Shreyans Jain, Priyanka Abbi', Summary: 'Strategic concept agent that reframes carbon planning using timing and value of emissions reduction pathways.', Details: 'Reframes decarbonisation planning around the time-value of emissions reductions. Models multiple reduction pathways and recommends optimised capex deployment.', AI_Tooling: 'Pathway optimisation · Time-value emissions modelling · Capex sequencing', Has_OnePager: true, Slides: [{ title: 'Carbon Time Arbitrage Agent', subtitle: 'Strategic timing of decarbonisation investments', sections: [{ heading: 'Insight', body: 'A tonne of CO2 reduced today has higher climate value than a tonne reduced in 2040.' },{ heading: 'Our solution', body: 'A strategic agent that optimises the timing of reduction initiatives — front-loading high-time-value abatement.' },{ heading: 'Capabilities', list: ['Pathway modelling','Time-value emissions math','Capex sequencing','Sensitivity analysis'] },{ heading: 'Outcomes', body: 'Materially better climate impact from the same capex envelope.' }] }] },
-  { Asset_Name: 'Product Carbon Footprint (PCF) Analyzer', Sector: 'Net Zero Transition', Maturity: 'MVP', Owners: 'Ritesh Bhangale', Summary: 'Product-level carbon footprint calculation tool using BOMs, production volumes and emission-factor databases.', Details: 'Calculates product-level carbon footprints by ingesting BOMs, production data and emission factor databases.', AI_Tooling: 'BOM parsing · Emission factor matching · LCA-aligned calculations', Has_OnePager: true, Slides: [{ title: 'Product Carbon Footprint Analyzer', subtitle: 'Bulk PCF calculation for industrial portfolios', sections: [{ heading: 'Client challenge', body: 'PCF disclosure requirements are spreading. Calculating PCFs for thousands of SKUs is unfeasible by hand.' },{ heading: 'Our solution', body: 'An analyzer that ingests BOMs and production data and produces LCA-aligned PCFs at scale.' },{ heading: 'Capabilities', list: ['BOM parsing across formats','Multi-database emission factor matching','LCA-aligned methodology','Bulk processing'] },{ heading: 'Outcomes', body: 'PCFs calculated across full portfolios in days.' }] }] },
-  { Asset_Name: 'PCF Simulator', Sector: 'Net Zero Transition', Maturity: 'MVP', Owners: 'Marie-Sophie Dumont', Summary: 'Scenario simulation tool demonstrating value-chain transparency and product-level carbon footprint trade-offs.', Details: 'PCF Simulator lets users explore “what if” scenarios — material substitution, supplier switching, manufacturing changes — and immediately see the carbon implications.', AI_Tooling: 'Scenario modelling · Trade-off visualisation · Sensitivity analysis', Has_OnePager: true, Slides: [{ title: 'PCF Simulator', subtitle: 'Scenario simulation for product carbon footprints', sections: [{ heading: 'Use case', body: 'Once a baseline PCF is known, product and procurement teams need to explore reduction options.' },{ heading: 'Capabilities', list: ['Material substitution simulation','Supplier scenario modelling','Manufacturing change impact','Sensitivity analysis'] }] },{ title: 'PCF Simulator — Outcomes', subtitle: 'Decision support for product teams', sections: [{ heading: 'Use cases', body: 'Eco-design reviews, supplier selection, manufacturing footprint reduction.' },{ heading: 'Outcomes', body: 'Product and procurement teams quantify trade-offs in real time.' }] }] },
-  { Asset_Name: 'Supplier SBTi Maturity Analysis', Sector: 'Net Zero Transition', Maturity: 'MVP', Owners: 'Sarah Traynor, Sophia Colville', Summary: 'Supplier emissions and SBTi alignment analysis tool quantifying climate maturity across supplier portfolios.', Details: 'Builds on the SBTi Supplier Target Scanner with deeper analysis: supplier-level emissions estimation, gap analysis vs. client\'s own SBTi targets, and engagement recommendations.', AI_Tooling: 'Supplier emissions estimation · SBTi alignment scoring · Engagement prioritisation', Has_OnePager: true, Slides: [{ title: 'Supplier SBTi Maturity Analysis', subtitle: 'Quantifying supplier climate maturity at portfolio scale', sections: [{ heading: 'Client challenge', body: 'Clients need to know which suppliers represent emissions risk vs. opportunity, and where to focus engagement.' },{ heading: 'Our solution', body: 'A deeper analysis tool combining supplier emissions estimation with SBTi alignment scoring.' },{ heading: 'Capabilities', list: ['Supplier-level emissions estimation','SBTi alignment scoring','Gap analysis vs. client targets','Engagement priority ranking'] },{ heading: 'Outcomes', body: 'Concrete supplier engagement plan focused on the suppliers that move the needle.' }] }] },
-
-  // ==== SUSTAINABLE VALUE CHAINS / CIRCULAR PRODUCTS ====
-  { Asset_Name: 'Sustainable Product Design Copilot', Sector: 'Sustainable Value Chains, Sustainable & Circular Products', Maturity: 'MVP', Owners: 'Jose Lopez', Summary: 'AI-supported sustainable and circular product concept generation and trade-off support.', Details: 'A design copilot that helps product teams generate sustainable and circular product concepts, evaluate trade-offs and choose between options.', AI_Tooling: 'Concept generation LLMs · Multi-criteria trade-off evaluation · Eco-design heuristics', Has_OnePager: false, Slides: [] },
-  { Asset_Name: 'Critical Raw Materials Exposure Analyzer', Sector: 'Sustainable Value Chains, Sustainable & Circular Products', Maturity: 'MVP', Owners: 'Simon Rockinghausen, Maximilian Krempel, Jonas Strunk', Summary: 'AI-based raw materials exposure assessment combining procurement and external risk indicators.', Details: 'Analyses critical raw materials exposure across a client\'s product portfolio by combining procurement data with external risk indicators.', AI_Tooling: 'Procurement data ingestion · External risk feed integration · CRM Act alignment', Has_OnePager: true, Slides: [{ title: 'Critical Raw Materials Exposure Analyzer', subtitle: 'CRM Act-aligned exposure assessment', sections: [{ heading: 'Client challenge', body: 'EU CRM Act and broader supply security pressures require clients to understand their critical raw materials exposure.' },{ heading: 'Our solution', body: 'An AI analyzer that combines procurement data with external risk indicators to map exposure.' }] },{ title: 'Capabilities & Outcomes', subtitle: 'From procurement data to portfolio risk view', sections: [{ heading: 'Capabilities', list: ['CRM Act materials coverage','Procurement data integration','Geopolitical + ESG + concentration risk','Portfolio-level heatmaps'] },{ heading: 'Outcomes', body: 'Procurement and sustainability teams move from intuition to data-driven CRM strategy.' }] }] },
-  { Asset_Name: 'Product Portfolio Optimizer', Sector: 'Sustainable Value Chains, Sustainable & Circular Products', Maturity: 'MVP', Owners: 'Nora Albu, Sandro Luh, Simon Rockinghausen', Summary: 'Interactive portfolio steering solution linking sustainability and financial performance.', Details: 'Helps product portfolio managers steer their portfolios on combined sustainability and financial KPIs.', AI_Tooling: 'Portfolio optimisation · Sustainability + financial scoring · Scenario simulation', Has_OnePager: true, Slides: [{ title: 'Product Portfolio Optimizer', subtitle: 'Sustainability + financial portfolio steering', sections: [{ heading: 'Client challenge', body: 'Product portfolio decisions increasingly need to balance sustainability and financial performance.' },{ heading: 'Our solution', body: 'An interactive optimizer that combines both lenses into one decision view.' },{ heading: 'Capabilities', list: ['Combined sustainability + financial scoring','Portfolio visualisation','Scenario simulation','Invest / redesign / retire recommendations'] },{ heading: 'Outcomes', body: 'Faster, more confident portfolio decisions with a defensible evidence base.' }] }] },
-  { Asset_Name: 'Packaging Portfolio Analyzer (Bowie)', Sector: 'Sustainable Value Chains, Sustainable & Circular Products', Maturity: 'MVP', Owners: 'Alexandra Sperl, Kristina Klein', Summary: 'Conversational AI concept for packaging compliance and portfolio analysis.', Details: 'Bowie is a conversational AI for packaging teams.', AI_Tooling: 'Conversational interface · Packaging regulation knowledge base · Portfolio analytics', Has_OnePager: true, Slides: [{ title: 'Packaging Portfolio Analyzer (Bowie)', subtitle: 'Conversational AI for packaging teams', sections: [{ heading: 'Client challenge', body: 'Packaging regulation (EU PPWR, EPR schemes, plastic taxes) is complex and packaging portfolios are huge.' },{ heading: 'Our solution', body: 'A conversational AI that answers compliance and portfolio questions in natural language, backed by live portfolio data.' },{ heading: 'Capabilities', list: ['PPWR / EPR knowledge base','Portfolio composition analysis','Format comparison','Reduction opportunity identification'] },{ heading: 'Outcomes', body: 'Packaging teams self-serve answers in minutes.' }] }] },
-  { Asset_Name: 'Circularity Business Case Calculator', Sector: 'Sustainable Value Chains, Sustainable & Circular Products', Maturity: 'MVP', Owners: 'Filippo Marchetti, Antonia Moirano, Mariaclara Palumbo', Summary: 'Circularity business case modelling asset supporting investment and portfolio decision-making.', Details: 'A circularity business case modelling tool for take-back schemes, refurbishment, material recovery.', AI_Tooling: 'Business case modelling · Circular flow simulation · Sensitivity analysis', Has_OnePager: false, Slides: [] },
-  { Asset_Name: 'Eco-design Companion', Sector: 'Sustainable Value Chains, Sustainable & Circular Products', Maturity: 'MVP', Owners: 'Baptiste Senne-Donnais', Summary: 'GenAI eco-design companion supporting circular product briefs, circularity assessments and trade-off decisions.', Details: 'A GenAI companion sitting alongside product designers throughout the eco-design process.', AI_Tooling: 'Eco-design heuristics · Circularity assessment · Trade-off LLMs', Has_OnePager: true, Slides: [{ title: 'Eco-design Companion', subtitle: 'GenAI alongside product designers', sections: [{ heading: 'Premise', body: 'Sustainability needs to be embedded in product design from the brief, not bolted on at the end.' },{ heading: 'Our solution', body: 'A GenAI companion that supports designers throughout the design process with eco-design expertise on demand.' }] },{ title: 'How it works', subtitle: 'Three modes: brief, assess, decide', sections: [{ heading: 'Brief mode', body: 'Helps shape circular and sustainable design briefs from initial concepts.' },{ heading: 'Assess mode', body: 'Evaluates current designs against circularity and sustainability criteria.' },{ heading: 'Decide mode', body: 'Supports trade-off decisions between competing design options.' }] },{ title: 'Outcomes', subtitle: 'Sustainability built in, not bolted on', sections: [{ heading: 'Designer outcomes', body: 'Designers gain eco-design fluency through working with the companion.' },{ heading: 'Product outcomes', body: 'Sustainability considered from day 1 of design, not retro-fitted.' },{ heading: 'Business outcomes', body: 'Faster time-to-market for sustainable products.' }] }] },
-
-  // ==== OPERATING MODEL ====
-  { Asset_Name: 'Process Design Pilot', Sector: 'Operating Model', Maturity: 'MVP', Owners: 'Raphael Thalhammer', Summary: 'AI-supported process design concept for sustainability operating model reinvention.', Details: 'A process design pilot that uses AI to map current sustainability operating model processes and recommend AI-enabled redesigns.', AI_Tooling: 'Process mining + LLM mapping · AI opportunity identification · Future-state design', Has_OnePager: false, Slides: [] },
-  { Asset_Name: 'AI-prone Sustainability Tasks Analyzer', Sector: 'Operating Model', Maturity: 'MVP', Owners: 'Claudia Daniel, Luisa Bischoff', Summary: 'Interactive assessment tool identifying where AI can create the highest value across sustainability tasks and roles.', Details: 'An interactive assessment that scores sustainability tasks and roles on AI suitability, value at stake, and implementation complexity.', AI_Tooling: 'Task taxonomy · AI suitability scoring · Value vs. complexity prioritisation', Has_OnePager: true, Slides: [{ title: 'AI-prone Sustainability Tasks Analyzer', subtitle: 'Where to deploy AI in sustainability functions', sections: [{ heading: 'Client challenge', body: 'Sustainability functions know AI can help, but don\'t know where to start.' },{ heading: 'Our solution', body: 'An interactive assessment scoring tasks and roles on AI suitability, value, and complexity.' },{ heading: 'Capabilities', list: ['Sustainability task taxonomy','AI suitability scoring','Value at stake estimation','Prioritised roadmap output'] },{ heading: 'Outcomes', body: 'A defensible AI-enablement roadmap for the sustainability function in days.' }] }] },
-  { Asset_Name: 'AI Enablement', Sector: 'Operating Model', Maturity: 'Client-proven', Owners: 'Nina Jais, Claudia Daniel', Summary: 'Sustainability AI enablement program building GenAI fluency and AI-first delivery capabilities across sustainability teams.', Details: 'A full sustainability AI enablement programme covering upskilling, tool deployment, ways of working, and operating model change.', AI_Tooling: 'Curriculum design · Tool deployment · Operating model change · Practice community', Has_OnePager: true, Slides: [{ title: 'AI Enablement', subtitle: 'Building AI-first sustainability teams', sections: [{ heading: 'Programme', body: 'A multi-track enablement programme covering upskilling, tool deployment, ways of working, and operating model change.' },{ heading: 'Tracks', list: ['GenAI fluency curriculum','Approved tool deployment','AI-first delivery playbooks','Practice community of practice','Measurement and outcomes tracking'] },{ heading: 'Outcomes', body: 'Sustainability teams shift from “AI-curious” to “AI-first”.' }] }] }
+  { Asset_Name:'CSRD Insights.ai', Sector:'ESG Intelligence', Maturity:'Client-proven', Owners:'John Prendergast', Summary:'Agentic benchmarking solution that extracts, scores and compares ESG disclosures across selected peer groups to generate rapid performance insights.', Details:'CSRD Insights.ai uses a coordinated set of AI agents to ingest peer ESRS disclosures, normalise and score them against a chosen benchmarking framework, and surface comparative insights to clients within hours rather than weeks.', AI_Tooling:'Multi-agent orchestration · Document extraction (RAG) · LLM-based scoring · Custom benchmarking engine', Has_OnePager:true, Slides:[{title:'CSRD Insights.ai',subtitle:'Agentic ESG Benchmarking Accelerator',sections:[{heading:'Client challenge',body:'CSRD readiness requires comparing a company\'s disclosures against peers, but manual benchmarking takes weeks per peer set and is hard to keep current as regulations evolve.'},{heading:'Our solution',body:'An agentic benchmarking pipeline that ingests peer disclosures, scores them against a chosen ESRS framework, and produces comparative insight decks ready for client review.'},{heading:'Capabilities',list:['Automated peer disclosure extraction','Scoring against custom ESRS / ESG frameworks','Side-by-side comparison views','Insight narrative generation']},{heading:'Outcomes',body:'Reduces benchmarking effort by 70%+ and enables practice teams to refresh peer benchmarks on demand.'}]}]},
+  { Asset_Name:'IRO.ai', Sector:'ESG Intelligence', Maturity:'Client-proven', Owners:'John Prendergast', Summary:'AI-supported double materiality accelerator combining internal and external client information to generate IROs and draft scoring for expert validation.', Details:'IRO.ai supports the Impact, Risk and Opportunity (IRO) identification step of the double materiality assessment.', AI_Tooling:'RAG over client + external sources · Materiality scoring agents · Rationale generation', Has_OnePager:true, Slides:[{title:'IRO.ai',subtitle:'Double Materiality IRO Accelerator',sections:[{heading:'Client challenge',body:'Identifying impacts, risks and opportunities for double materiality is research-heavy and consultant time-intensive.'},{heading:'Our solution',body:'An AI accelerator that combines internal client data and external market/regulatory signals to generate a draft IRO long-list with scoring rationale, ready for expert validation.'},{heading:'Capabilities',list:['Internal + external evidence harvesting','Draft IRO long-list generation','Scoring rationale per IRO','Expert review workflow']},{heading:'Outcomes',body:'Cuts IRO identification effort while improving completeness.'}]}]},
+  { Asset_Name:'ICoSR.ai', Sector:'ESG Intelligence', Maturity:'Client-proven', Owners:'John Prendergast', Summary:'Risk-based controls scoping solution using GenAI to tier, map and scope disclosures with the right level of control detail.', Details:'ICoSR.ai (Internal Controls over Sustainability Reporting) helps clients design proportionate control frameworks for sustainability data points.', AI_Tooling:'Risk tiering models · Control mapping LLMs · Gap analysis pipeline', Has_OnePager:true, Slides:[{title:'ICoSR.ai',subtitle:'Internal Controls over Sustainability Reporting',sections:[{heading:'Client challenge',body:'CSRD limited assurance and future reasonable assurance require robust internal controls over sustainability data.'},{heading:'Our solution',body:'A risk-based controls scoping accelerator that uses GenAI to tier disclosures, map to existing controls, and recommend new ones where needed.'},{heading:'Capabilities',list:['Disclosure-by-disclosure risk tiering','Mapping to existing control frameworks','Gap identification','Proportionate control recommendations']},{heading:'Outcomes',body:'Faster controls design with audit-ready rationale.'}]}]},
+  { Asset_Name:'ESGen.AI CSRD Reporting Accelerator', Sector:'ESG Intelligence', Maturity:'Client-proven', Owners:'John Prendergast', Summary:'Report-writing accelerator using prior reports, policies, datasets and CSRD expertise to generate CSRD-ready reports and gap assessments.', Details:'ESGen.AI combines a client\'s prior sustainability reports, policies, raw data and Accenture\'s CSRD expertise to draft CSRD-ready reports and identify gaps.', AI_Tooling:'RAG over client policies + reports · Section generation agents · ESRS gap detection', Has_OnePager:true, Slides:[{title:'ESGen.AI CSRD Reporting Accelerator',subtitle:'End-to-end CSRD reporting in weeks, not months',sections:[{heading:'Client challenge',body:'Writing a first CSRD report is a 6-12 month effort across dozens of consultants.'},{heading:'Our solution',body:'An accelerator that ingests prior reports, policies and raw data, then drafts CSRD-aligned report sections ready for expert review.'},{heading:'Capabilities',list:['Multi-source ingestion (reports, policies, datasets)','Section drafting against ESRS structure','Gap assessment vs. CSRD requirements','Editing and review workflow integration']},{heading:'Outcomes',body:'Cuts report drafting time by 50-70% while improving CSRD alignment and consistency.'}]}]},
+  { Asset_Name:'EmpCo Risk Checker', Sector:'ESG Intelligence', Maturity:'Client-ready', Owners:'Jane Ehlers, Sabrina Froehlich-Schiffer, Jessica Schallock, Rike Nickell, Heike Steiner', Summary:'AI-powered sustainability claims risk checker assessing statements against EmpCo directive criteria.', Details:'The EmpCo Risk Checker scans marketing copy, packaging text and product communications for sustainability claims, then evaluates each against the EU EmpCo Directive criteria.', AI_Tooling:'Claim extraction NLP · Regulation-aligned scoring · Rewrite suggestions', Has_OnePager:true, Slides:[{title:'EmpCo Risk Checker',subtitle:'Sustainability claims compliance accelerator',sections:[{heading:'Client challenge',body:'The EU EmpCo Directive sharply restricts sustainability claims in consumer-facing communications.'},{heading:'Our solution',body:'An AI risk checker that scans copy, identifies sustainability claims, and scores each against EmpCo criteria with rewrite suggestions.'},{heading:'Capabilities',list:['Bulk claim extraction across copy/packaging','EmpCo criteria scoring','Risk levelling (red/amber/green)','Audit trail and rewrite suggestions']},{heading:'Outcomes',body:'Allows brand and legal teams to triage thousands of claims in hours.'}]}]},
+  { Asset_Name:'ESG Forms Filler', Sector:'ESG Intelligence', Maturity:'Client-ready', Owners:'Hiba Buras, Paul-Eloi Esclattier, Jean-Baptiste Alario', Summary:'AI assistant for ESG questionnaires, ratings submissions and sustainability forms with source-backed responses.', Details:'ESG Forms Filler ingests CDP, EcoVadis, S&P Global and similar ESG questionnaires, then drafts responses pulled from a client\'s prior submissions, policies and datasets.', AI_Tooling:'RAG over prior submissions · Citation-required response generation · Multi-questionnaire templates', Has_OnePager:true, Slides:[{title:'ESG Forms Filler — Overview',subtitle:'AI-powered ESG questionnaire assistant',sections:[{heading:'Client challenge',body:'Clients face dozens of ESG ratings questionnaires every year — each takes 100+ hours and the responses must be consistent.'},{heading:'Our solution',body:'An AI assistant that drafts answers from prior submissions, policies and ESG datasets, with citations back to source documents.'},{heading:'Capabilities',list:['Pre-loaded major ESG questionnaire templates','Source-backed response generation','Consistency checks across forms','Reviewer collaboration workflow']}]},{title:'ESG Forms Filler — How it works',subtitle:'From upload to first draft in under an hour',sections:[{heading:'Workflow',body:'Upload prior submissions and current policies. Select the target questionnaire. The system drafts responses with citations, which are then routed for review.'},{heading:'Source backing',body:'Every generated response includes one or more citations to the source document, paragraph and date.'},{heading:'Outcomes',body:'Cuts questionnaire response time by 60-80%; gives clients a single source of truth for sustainability statements across submissions.'}]}]},
+  { Asset_Name:'ReputAI', Sector:'ESG Intelligence', Maturity:'Client-ready', Owners:'Ashish Verma', Summary:'GenAI-powered ESDD screening solution using workflow, research and browser agents to assess sustainability KPIs.', Details:'ReputAI accelerates Environmental and Social Due Diligence (ESDD) by orchestrating workflow, research and browser-based agents to screen targets across sustainability KPIs.', AI_Tooling:'Multi-agent (workflow + research + browser agents) · Sustainability KPI scoring · Public-source ingestion', Has_OnePager:true, Slides:[{title:'ReputAI — ESDD Accelerator',subtitle:'AI screening for Environmental & Social Due Diligence',sections:[{heading:'Client challenge',body:'M&A and investment teams need fast, repeatable sustainability due diligence.'},{heading:'Our solution',body:'A GenAI-powered screening solution that uses orchestrated agents to assess targets across sustainability KPIs from documents and public sources.'},{heading:'Capabilities',list:['Browser agents for public-source research','Workflow agents for KPI scoring','Research agents for VDR document analysis','Configurable KPI frameworks']}]},{title:'ReputAI — Outcomes',subtitle:'From weeks to days',sections:[{heading:'Speed',body:'Initial sustainability screening reports delivered in 2-3 days vs. 2-3 weeks traditionally.'},{heading:'Coverage',body:'Broader KPI coverage with consistent scoring across deal pipeline.'},{heading:'Audit trail',body:'Every score is traceable to the underlying evidence.'}]}]},
+  { Asset_Name:'RegNav', Sector:'ESG Intelligence', Maturity:'Client-ready', Owners:'Anais Schad', Summary:'AI-enabled regulatory navigator translating sustainability regulation into client-specific actions.', Details:'RegNav scans evolving sustainability regulation across EU, UK and global jurisdictions, mapping each requirement to the affected client function and translating it into a prioritised action list.', AI_Tooling:'Regulatory text ingestion · Client-specific mapping LLMs · Continuous monitoring', Has_OnePager:true, Slides:[{title:'RegNav',subtitle:'Sustainability regulatory navigator',sections:[{heading:'Client challenge',body:'Sustainability regulation is fragmenting and accelerating. Clients struggle to know which requirements apply to them.'},{heading:'Our solution',body:'An AI navigator that ingests regulatory text, maps it to the client\'s footprint and functions, and translates it into prioritised actions.'},{heading:'Capabilities',list:['EU + UK + global regulation coverage','Client-specific applicability mapping','Action prioritisation','Continuous monitoring of changes']},{heading:'Outcomes',body:'Clients move from reactive to proactive regulatory posture.'}]}]},
+  { Asset_Name:'AI-powered Sustainability Reporting', Sector:'ESG Intelligence', Maturity:'Client-ready', Owners:'Florian Funk, Jessica Schallock', Summary:'Multi-agent sustainability reporting accelerator supporting CSRD, GRI, KPI consistency, editing and compliance workflows.', Details:'A modular multi-agent reporting accelerator. Agents handle data ingestion, KPI calculation, narrative drafting, cross-framework consistency checks and reviewer workflows in parallel.', AI_Tooling:'Multi-agent orchestration · Cross-framework KPI consistency · Editing assistant agents', Has_OnePager:true, Slides:[{title:'AI-powered Sustainability Reporting — Architecture',subtitle:'Multi-agent reporting accelerator',sections:[{heading:'Client challenge',body:'Sustainability reporting now spans CSRD, GRI, SASB, TCFD, ISSB and dozens of voluntary frameworks.'},{heading:'Architecture',body:'A coordinated set of specialised agents — ingestion, calculation, drafting, consistency, editing — with a central orchestrator.'},{heading:'Capabilities',list:['Multi-framework support','KPI consistency engine','Narrative drafting agents','Editing and review automation']}]},{title:'AI-powered Sustainability Reporting — Use cases',subtitle:'From annual report to executive briefing',sections:[{heading:'Annual reporting',body:'Drafts CSRD/GRI sections from raw data with built-in consistency checks.'},{heading:'Interim updates',body:'Quick-turn quarterly updates and executive briefings.'},{heading:'Cross-framework mapping',body:'Single data model serving multiple framework outputs.'},{heading:'Outcomes',body:'Cuts reporting cycle time by 40-60%; reduces inconsistencies between framework submissions.'}]}]},
+  { Asset_Name:'Nature VC', Sector:'Nature & Biodiversity', Maturity:'Client-ready', Owners:'Barnabas Harrison', Summary:'AI-powered nature maturity assessment generating hypotheses on nature impacts, dependencies and TNFD-related risks.', Details:'Nature VC assesses a client\'s nature maturity by ingesting operational, supply chain and location data, then generates AI-driven hypotheses on nature impacts, dependencies and TNFD-aligned risks.', AI_Tooling:'Geospatial nature risk models · Supply-chain dependency mapping · TNFD-aligned hypothesis generation', Has_OnePager:true, Slides:[{title:'Nature VC',subtitle:'AI nature maturity assessment',sections:[{heading:'Client challenge',body:'TNFD adoption is accelerating, but most clients don\'t know where their material nature impacts and dependencies sit.'},{heading:'Our solution',body:'An AI accelerator that generates initial nature impact, dependency and risk hypotheses from operational and supply chain data.'},{heading:'Capabilities',list:['Geospatial impact mapping','Supply-chain dependency analysis','TNFD-aligned risk hypotheses','Maturity scoring']},{heading:'Outcomes',body:'Lets clients begin TNFD work on day 1 with concrete hypotheses to validate.'}]}]},
+  { Asset_Name:'Anti Greenwash AI', Sector:'Net Zero Transition', Maturity:'Client-ready', Owners:'Tim Callaghan', Summary:'GenAI-powered anti-greenwashing solution identifying sustainability claims and testing them against regulatory criteria.', Details:'Anti Greenwash AI scans client sustainability communications, extracts every sustainability claim, and tests each against UK CMA, EU EmpCo, ASA and other anti-greenwashing regimes.', AI_Tooling:'Claim extraction · Multi-jurisdiction regulatory checks · Risk rating', Has_OnePager:true, Slides:[{title:'Anti Greenwash AI',subtitle:'GenAI anti-greenwashing solution',sections:[{heading:'Client challenge',body:'Anti-greenwashing enforcement is sharply increasing across UK and EU.'},{heading:'Our solution',body:'A GenAI scanner that extracts sustainability claims and tests them against multi-jurisdiction regulatory criteria.'},{heading:'Capabilities',list:['UK CMA, EU EmpCo, ASA coverage','Bulk claims extraction','Risk-rated recommendations','Audit trail per claim']},{heading:'Outcomes',body:'Reduces greenwashing exposure across hundreds of communications in hours.'}]}]},
+  { Asset_Name:'AI CO2 Calculator', Sector:'Net Zero Transition', Maturity:'MVP', Owners:'Vishal Jain', Summary:'AI sustainability calculator measuring carbon, energy, water and time impact of AI prompts and workflows.', Details:'A meta-tool that quantifies the environmental cost of AI usage itself.', AI_Tooling:'Per-token energy modelling · Cloud carbon-intensity factors · Prompt-level analytics', Has_OnePager:true, Slides:[{title:'AI CO2 Calculator',subtitle:'Measuring the footprint of AI use',sections:[{heading:'Premise',body:'GenAI itself has a non-trivial carbon, energy and water footprint.'},{heading:'Our solution',body:'A calculator that quantifies the environmental cost per prompt and per workflow across major LLM providers.'},{heading:'Capabilities',list:['Per-prompt carbon / energy / water','Workflow-level aggregation','Provider comparison','Reduction recommendations']},{heading:'Outcomes',body:'Practice teams quantify and report their own AI footprint.'}]}]},
+  { Asset_Name:'SBTi Supplier Target Scanner', Sector:'Net Zero Transition', Maturity:'MVP', Owners:'Jonas Kreyenkamp', Summary:'Automated supplier climate target screening workflow identifying SBTi- and Paris-aligned commitments.', Details:'Scans entire supplier portfolios to identify which suppliers have set SBTi-validated or Paris-aligned climate targets.', AI_Tooling:'Supplier identification · SBTi database matching · Target text parsing', Has_OnePager:true, Slides:[{title:'SBTi Supplier Target Scanner',subtitle:'Scope 3 supplier climate maturity screening',sections:[{heading:'Client challenge',body:'Effective Scope 3 strategy requires knowing which suppliers have credible climate targets.'},{heading:'Our solution',body:'An automated scanner that screens entire supplier portfolios against SBTi and Paris-aligned commitments.'},{heading:'Capabilities',list:['Bulk supplier identification','SBTi-validated commitment matching','Target text parsing','Gap heatmaps by spend / category']},{heading:'Outcomes',body:'Produces a portfolio-level supplier climate maturity view in days.'}]}]},
+  { Asset_Name:'Low Carbon Fuel Pre-Feasibility Agent', Sector:'Net Zero Transition', Maturity:'MVP', Owners:'Sayyed Gulzaib Miyan, Alpesh Sosa, Akash Som Gupta', Summary:'Agentic decision intelligence solution for rapid low-carbon product feasibility assessment.', Details:'Multi-agent decision intelligence accelerator for assessing low-carbon fuel investment opportunities across policy, cost and market factors.', AI_Tooling:'Multi-agent decision intelligence · Policy + market signal aggregation · TEA modelling', Has_OnePager:true, Slides:[{title:'Low Carbon Fuel Pre-Feasibility Agent',subtitle:'Agentic decision intelligence for energy transition',sections:[{heading:'Client challenge',body:'Energy companies face dozens of low-carbon fuel opportunities — each requires extensive pre-feasibility work.'},{heading:'Our solution',body:'A multi-agent decision intelligence solution that assesses opportunities across policy, cost, technology and market dimensions in days.'}]},{title:'Architecture',subtitle:'How the agents work together',sections:[{heading:'Specialised agents',list:['Policy intelligence agent','Technology readiness agent','Cost / TEA modelling agent','Market sizing agent','Competitive landscape agent']},{heading:'Coordination',body:'A central orchestrator runs agents in parallel, resolves conflicts, and synthesises findings into a pre-feasibility report.'}]},{title:'Outcomes',subtitle:'Days, not months',sections:[{heading:'Speed',body:'5-10x faster pre-feasibility cycles.'},{heading:'Quality',body:'Consistent methodology across opportunities; auditable evidence trail.'},{heading:'Decision support',body:'Outputs designed for direct use in investment committee briefings.'}]}]},
+  { Asset_Name:'Carbon Steering Dashboard', Sector:'Net Zero Transition', Maturity:'MVP', Owners:'Luisa Bischoff, Claudia Daniel', Summary:'Executive dashboard consolidating emissions, reduction initiatives and net-zero progress into one management view.', Details:'A live executive dashboard that consolidates emissions data, reduction initiative status, capex commitments and net-zero progress into a single management view.', AI_Tooling:'Data integration · Anomaly detection · Initiative impact forecasting', Has_OnePager:true, Slides:[{title:'Carbon Steering Dashboard',subtitle:'Executive net-zero management cockpit',sections:[{heading:'Client challenge',body:'Executives running net-zero programmes lack a single live view linking emissions, initiatives, capex and progress.'},{heading:'Our solution',body:'A consolidating dashboard with AI-driven anomaly detection and initiative impact forecasting.'},{heading:'Capabilities',list:['Live emissions data integration','Initiative status tracking','Anomaly alerts','Forward-looking impact forecasts']},{heading:'Outcomes',body:'Executive committees move from quarterly reviews to live steering.'}]}]},
+  { Asset_Name:'Carbon Time Arbitrage Agent', Sector:'Net Zero Transition', Maturity:'MVP', Owners:'Shreyans Jain, Priyanka Abbi', Summary:'Strategic concept agent that reframes carbon planning using timing and value of emissions reduction pathways.', Details:'Reframes decarbonisation planning around the time-value of emissions reductions.', AI_Tooling:'Pathway optimisation · Time-value emissions modelling · Capex sequencing', Has_OnePager:true, Slides:[{title:'Carbon Time Arbitrage Agent',subtitle:'Strategic timing of decarbonisation investments',sections:[{heading:'Insight',body:'A tonne of CO2 reduced today has higher climate value than a tonne reduced in 2040.'},{heading:'Our solution',body:'A strategic agent that optimises the timing of reduction initiatives — front-loading high-time-value abatement.'},{heading:'Capabilities',list:['Pathway modelling','Time-value emissions math','Capex sequencing','Sensitivity analysis']},{heading:'Outcomes',body:'Materially better climate impact from the same capex envelope.'}]}]},
+  { Asset_Name:'Product Carbon Footprint (PCF) Analyzer', Sector:'Net Zero Transition', Maturity:'MVP', Owners:'Ritesh Bhangale', Summary:'Product-level carbon footprint calculation tool using BOMs, production volumes and emission-factor databases.', Details:'Calculates product-level carbon footprints by ingesting BOMs, production data and emission factor databases.', AI_Tooling:'BOM parsing · Emission factor matching · LCA-aligned calculations', Has_OnePager:true, Slides:[{title:'Product Carbon Footprint Analyzer',subtitle:'Bulk PCF calculation for industrial portfolios',sections:[{heading:'Client challenge',body:'PCF disclosure requirements are spreading. Calculating PCFs for thousands of SKUs is unfeasible by hand.'},{heading:'Our solution',body:'An analyzer that ingests BOMs and production data and produces LCA-aligned PCFs at scale.'},{heading:'Capabilities',list:['BOM parsing across formats','Multi-database emission factor matching','LCA-aligned methodology','Bulk processing']},{heading:'Outcomes',body:'PCFs calculated across full portfolios in days.'}]}]},
+  { Asset_Name:'PCF Simulator', Sector:'Net Zero Transition', Maturity:'MVP', Owners:'Marie-Sophie Dumont', Summary:'Scenario simulation tool demonstrating value-chain transparency and product-level carbon footprint trade-offs.', Details:'PCF Simulator lets users explore what-if scenarios — material substitution, supplier switching, manufacturing changes — and immediately see the carbon implications.', AI_Tooling:'Scenario modelling · Trade-off visualisation · Sensitivity analysis', Has_OnePager:true, Slides:[{title:'PCF Simulator',subtitle:'Scenario simulation for product carbon footprints',sections:[{heading:'Use case',body:'Once a baseline PCF is known, product and procurement teams need to explore reduction options.'},{heading:'Capabilities',list:['Material substitution simulation','Supplier scenario modelling','Manufacturing change impact','Sensitivity analysis']}]},{title:'PCF Simulator — Outcomes',subtitle:'Decision support for product teams',sections:[{heading:'Use cases',body:'Eco-design reviews, supplier selection, manufacturing footprint reduction.'},{heading:'Outcomes',body:'Product and procurement teams quantify trade-offs in real time.'}]}]},
+  { Asset_Name:'Supplier SBTi Maturity Analysis', Sector:'Net Zero Transition', Maturity:'MVP', Owners:'Sarah Traynor, Sophia Colville', Summary:'Supplier emissions and SBTi alignment analysis tool quantifying climate maturity across supplier portfolios.', Details:'Builds on the SBTi Supplier Target Scanner with deeper analysis: supplier-level emissions estimation, gap analysis vs. client\'s own SBTi targets, and engagement recommendations.', AI_Tooling:'Supplier emissions estimation · SBTi alignment scoring · Engagement prioritisation', Has_OnePager:true, Slides:[{title:'Supplier SBTi Maturity Analysis',subtitle:'Quantifying supplier climate maturity at portfolio scale',sections:[{heading:'Client challenge',body:'Clients need to know which suppliers represent emissions risk vs. opportunity, and where to focus engagement.'},{heading:'Our solution',body:'A deeper analysis tool combining supplier emissions estimation with SBTi alignment scoring.'},{heading:'Capabilities',list:['Supplier-level emissions estimation','SBTi alignment scoring','Gap analysis vs. client targets','Engagement priority ranking']},{heading:'Outcomes',body:'Concrete supplier engagement plan focused on the suppliers that move the needle.'}]}]},
+  { Asset_Name:'Sustainable Product Design Copilot', Sector:'Sustainable Value Chains, Sustainable & Circular Products', Maturity:'MVP', Owners:'Jose Lopez', Summary:'AI-supported sustainable and circular product concept generation and trade-off support.', Details:'A design copilot that helps product teams generate sustainable and circular product concepts, evaluate trade-offs and choose between options.', AI_Tooling:'Concept generation LLMs · Multi-criteria trade-off evaluation · Eco-design heuristics', Has_OnePager:false, Slides:[]},
+  { Asset_Name:'Critical Raw Materials Exposure Analyzer', Sector:'Sustainable Value Chains, Sustainable & Circular Products', Maturity:'MVP', Owners:'Simon Rockinghausen, Maximilian Krempel, Jonas Strunk', Summary:'AI-based raw materials exposure assessment combining procurement and external risk indicators.', Details:'Analyses critical raw materials exposure across a client\'s product portfolio by combining procurement data with external risk indicators.', AI_Tooling:'Procurement data ingestion · External risk feed integration · CRM Act alignment', Has_OnePager:true, Slides:[{title:'Critical Raw Materials Exposure Analyzer',subtitle:'CRM Act-aligned exposure assessment',sections:[{heading:'Client challenge',body:'EU CRM Act and broader supply security pressures require clients to understand their critical raw materials exposure.'},{heading:'Our solution',body:'An AI analyzer that combines procurement data with external risk indicators to map exposure.'}]},{title:'Capabilities & Outcomes',subtitle:'From procurement data to portfolio risk view',sections:[{heading:'Capabilities',list:['CRM Act materials coverage','Procurement data integration','Geopolitical + ESG + concentration risk','Portfolio-level heatmaps']},{heading:'Outcomes',body:'Procurement and sustainability teams move from intuition to data-driven CRM strategy.'}]}]},
+  { Asset_Name:'Product Portfolio Optimizer', Sector:'Sustainable Value Chains, Sustainable & Circular Products', Maturity:'MVP', Owners:'Nora Albu, Sandro Luh, Simon Rockinghausen', Summary:'Interactive portfolio steering solution linking sustainability and financial performance.', Details:'Helps product portfolio managers steer their portfolios on combined sustainability and financial KPIs.', AI_Tooling:'Portfolio optimisation · Sustainability + financial scoring · Scenario simulation', Has_OnePager:true, Slides:[{title:'Product Portfolio Optimizer',subtitle:'Sustainability + financial portfolio steering',sections:[{heading:'Client challenge',body:'Product portfolio decisions increasingly need to balance sustainability and financial performance.'},{heading:'Our solution',body:'An interactive optimizer that combines both lenses into one decision view.'},{heading:'Capabilities',list:['Combined sustainability + financial scoring','Portfolio visualisation','Scenario simulation','Invest / redesign / retire recommendations']},{heading:'Outcomes',body:'Faster, more confident portfolio decisions with a defensible evidence base.'}]}]},
+  { Asset_Name:'Packaging Portfolio Analyzer (Bowie)', Sector:'Sustainable Value Chains, Sustainable & Circular Products', Maturity:'MVP', Owners:'Alexandra Sperl, Kristina Klein', Summary:'Conversational AI concept for packaging compliance and portfolio analysis.', Details:'Bowie is a conversational AI for packaging teams.', AI_Tooling:'Conversational interface · Packaging regulation knowledge base · Portfolio analytics', Has_OnePager:true, Slides:[{title:'Packaging Portfolio Analyzer (Bowie)',subtitle:'Conversational AI for packaging teams',sections:[{heading:'Client challenge',body:'Packaging regulation (EU PPWR, EPR schemes, plastic taxes) is complex and packaging portfolios are huge.'},{heading:'Our solution',body:'A conversational AI that answers compliance and portfolio questions in natural language, backed by live portfolio data.'},{heading:'Capabilities',list:['PPWR / EPR knowledge base','Portfolio composition analysis','Format comparison','Reduction opportunity identification']},{heading:'Outcomes',body:'Packaging teams self-serve answers in minutes.'}]}]},
+  { Asset_Name:'Circularity Business Case Calculator', Sector:'Sustainable Value Chains, Sustainable & Circular Products', Maturity:'MVP', Owners:'Filippo Marchetti, Antonia Moirano, Mariaclara Palumbo', Summary:'Circularity business case modelling asset supporting investment and portfolio decision-making.', Details:'A circularity business case modelling tool for take-back schemes, refurbishment, material recovery.', AI_Tooling:'Business case modelling · Circular flow simulation · Sensitivity analysis', Has_OnePager:false, Slides:[]},
+  { Asset_Name:'Eco-design Companion', Sector:'Sustainable Value Chains, Sustainable & Circular Products', Maturity:'MVP', Owners:'Baptiste Senne-Donnais', Summary:'GenAI eco-design companion supporting circular product briefs, circularity assessments and trade-off decisions.', Details:'A GenAI companion sitting alongside product designers throughout the eco-design process.', AI_Tooling:'Eco-design heuristics · Circularity assessment · Trade-off LLMs', Has_OnePager:true, Slides:[{title:'Eco-design Companion',subtitle:'GenAI alongside product designers',sections:[{heading:'Premise',body:'Sustainability needs to be embedded in product design from the brief, not bolted on at the end.'},{heading:'Our solution',body:'A GenAI companion that supports designers throughout the design process with eco-design expertise on demand.'}]},{title:'How it works',subtitle:'Three modes: brief, assess, decide',sections:[{heading:'Brief mode',body:'Helps shape circular and sustainable design briefs from initial concepts.'},{heading:'Assess mode',body:'Evaluates current designs against circularity and sustainability criteria.'},{heading:'Decide mode',body:'Supports trade-off decisions between competing design options.'}]},{title:'Outcomes',subtitle:'Sustainability built in, not bolted on',sections:[{heading:'Designer outcomes',body:'Designers gain eco-design fluency through working with the companion.'},{heading:'Product outcomes',body:'Sustainability considered from day 1 of design, not retro-fitted.'},{heading:'Business outcomes',body:'Faster time-to-market for sustainable products.'}]}]},
+  { Asset_Name:'Process Design Pilot', Sector:'Operating Model', Maturity:'MVP', Owners:'Raphael Thalhammer', Summary:'AI-supported process design concept for sustainability operating model reinvention.', Details:'A process design pilot that uses AI to map current sustainability operating model processes and recommend AI-enabled redesigns.', AI_Tooling:'Process mining + LLM mapping · AI opportunity identification · Future-state design', Has_OnePager:false, Slides:[]},
+  { Asset_Name:'AI-prone Sustainability Tasks Analyzer', Sector:'Operating Model', Maturity:'MVP', Owners:'Claudia Daniel, Luisa Bischoff', Summary:'Interactive assessment tool identifying where AI can create the highest value across sustainability tasks and roles.', Details:'An interactive assessment that scores sustainability tasks and roles on AI suitability, value at stake, and implementation complexity.', AI_Tooling:'Task taxonomy · AI suitability scoring · Value vs. complexity prioritisation', Has_OnePager:true, Slides:[{title:'AI-prone Sustainability Tasks Analyzer',subtitle:'Where to deploy AI in sustainability functions',sections:[{heading:'Client challenge',body:'Sustainability functions know AI can help, but don\'t know where to start.'},{heading:'Our solution',body:'An interactive assessment scoring tasks and roles on AI suitability, value, and complexity.'},{heading:'Capabilities',list:['Sustainability task taxonomy','AI suitability scoring','Value at stake estimation','Prioritised roadmap output']},{heading:'Outcomes',body:'A defensible AI-enablement roadmap for the sustainability function in days.'}]}]},
+  { Asset_Name:'AI Enablement', Sector:'Operating Model', Maturity:'Client-proven', Owners:'Nina Jais, Claudia Daniel', Summary:'Sustainability AI enablement program building GenAI fluency and AI-first delivery capabilities across sustainability teams.', Details:'A full sustainability AI enablement programme covering upskilling, tool deployment, ways of working, and operating model change.', AI_Tooling:'Curriculum design · Tool deployment · Operating model change · Practice community', Has_OnePager:true, Slides:[{title:'AI Enablement',subtitle:'Building AI-first sustainability teams',sections:[{heading:'Programme',body:'A multi-track enablement programme covering upskilling, tool deployment, ways of working, and operating model change.'},{heading:'Tracks',list:['GenAI fluency curriculum','Approved tool deployment','AI-first delivery playbooks','Practice community of practice','Measurement and outcomes tracking']},{heading:'Outcomes',body:'Sustainability teams shift from "AI-curious" to "AI-first".'}]}]}
 ];
-
 
 /* ---- HELPERS ------------------------------------------------------------ */
 const $  = (sel, root=document) => root.querySelector(sel);
@@ -1860,24 +1222,15 @@ const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
 
 function escHTML(s) {
   if (s == null) return '';
-  return String(s)
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
-
-function truncate(s, n) {
-  if (!s) return '';
-  return s.length > n ? s.substring(0, n-1).trim() + '…' : s;
-}
+function truncate(s, n) { if (!s) return ''; return s.length > n ? s.substring(0, n-1).trim() + '…' : s; }
+function isExternal() { return state.viewMode === 'external'; }
 
 function newFormUrl(listName, defaults) {
-  const encoded = encodeURIComponent(listName);
-  let url = `${SP_SITE}/Lists/${encoded}/NewForm.aspx`;
+  let url = `${SP_SITE}/Lists/${encodeURIComponent(listName)}/NewForm.aspx`;
   if (defaults && typeof defaults === 'object') {
-    const qs = Object.entries(defaults)
-      .filter(([k, v]) => v != null && v !== '')
-      .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
-      .join('&');
+    const qs = Object.entries(defaults).filter(([k,v]) => v != null && v !== '').map(([k,v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join('&');
     if (qs) url += '?' + qs;
   }
   return url;
@@ -1886,15 +1239,8 @@ function newFormUrl(listName, defaults) {
 function gradientFromString(s) {
   if (!s) return 'linear-gradient(135deg,#A100FF,#E619E6)';
   let h = 0;
-  for (let i = 0; i < s.length; i++) {
-    h = ((h << 5) - h) + s.charCodeAt(i);
-    h |= 0;
-  }
-  const palette = [
-    ['#A100FF','#E619E6'], ['#7500C0','#FF50A0'], ['#5E00A0','#A100FF'],
-    ['#3D0080','#7500C0'], ['#A100FF','#FF50A0'], ['#7500C0','#E619E6'],
-    ['#5E00A0','#FF50A0'], ['#9000E0','#FF80C0']
-  ];
+  for (let i = 0; i < s.length; i++) { h = ((h << 5) - h) + s.charCodeAt(i); h |= 0; }
+  const palette = [['#A100FF','#E619E6'],['#7500C0','#FF50A0'],['#5E00A0','#A100FF'],['#3D0080','#7500C0'],['#A100FF','#FF50A0'],['#7500C0','#E619E6'],['#5E00A0','#FF50A0'],['#9000E0','#FF80C0']];
   const [a, b] = palette[Math.abs(h) % palette.length];
   return `linear-gradient(135deg, ${a}, ${b})`;
 }
@@ -1909,613 +1255,285 @@ function highlight(text, query) {
 
 function debounce(fn, wait) {
   let t;
-  return function() {
-    const ctx = this, args = arguments;
-    clearTimeout(t);
-    t = setTimeout(() => fn.apply(ctx, args), wait);
-  };
+  return function() { const ctx = this, args = arguments; clearTimeout(t); t = setTimeout(() => fn.apply(ctx, args), wait); };
 }
 
-function isExternal() {
-  return state.viewMode === 'external';
-}
-
-function getOwnerDisplay(owners) {
-  if (isExternal()) return 'Accenture UKI Sustainability';
-  return owners || '—';
-}
-
-function renderPlaceholder(title, text, ctaUrl, ctaLabel) {
+function renderPlaceholder(title, text) {
   return `<div class="placeholder">
-    <div class="placeholder-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M2 10h20"></path></svg></div>
+    <div class="placeholder-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M2 10h20"></path></svg></div>
     <div class="placeholder-title">${escHTML(title)}</div>
     <div class="placeholder-text">${escHTML(text)}</div>
-    ${ctaUrl ? `<a class="btn btn-primary btn-sm" href="${escHTML(ctaUrl)}" target="${LINK_TARGET}" rel="noopener">${escHTML(ctaLabel || 'Contribute')}</a>` : ''}
   </div>`;
 }
 
+/* ---- RENDER ------------------------------------------------------------- */
 function renderAssets() {
   const container = $('#assetsContainer');
   const toolbar = $('#assetToolbar');
   if (!container) return;
-
-  if (!state.activeSector) {
-    renderAssetsOverview(container, toolbar);
-  } else {
-    renderAssetsDetail(container, toolbar);
-  }
+  if (!state.activeSector) renderAssetsOverview(container, toolbar);
+  else renderAssetsDetail(container, toolbar);
 }
 
 function renderAssetsOverview(container, toolbar) {
-  if (toolbar) {
-    toolbar.classList.add('hidden');
-    const section = $('#section-assets');
-    if (container.contains(toolbar) || toolbar.parentElement !== section) {
-      section.insertBefore(toolbar, container);
-    }
-  }
+  if (toolbar) { toolbar.classList.add('hidden'); const section = $('#section-assets'); if (container.contains(toolbar) || toolbar.parentElement !== section) section.insertBefore(toolbar, container); }
+  const hero = $('#heroSection'); if (hero) hero.style.display = '';
 
-  const sectorOrder = [];
-  const grouped = {};
-  ASSET_DATA.forEach(a => {
-    if (!grouped[a.Sector]) { grouped[a.Sector] = []; sectorOrder.push(a.Sector); }
-    grouped[a.Sector].push(a);
-  });
-
-  const PREFERRED = [
-    'ESG Intelligence',
-    'Net Zero Transition',
-    'Sustainable Value Chains, Sustainable & Circular Products',
-    'Nature & Biodiversity',
-    'Operating Model'
-  ];
+  const grouped = {}; const sectorOrder = [];
+  ASSET_DATA.forEach(a => { if (!grouped[a.Sector]) { grouped[a.Sector] = []; sectorOrder.push(a.Sector); } grouped[a.Sector].push(a); });
+  const PREFERRED = ['ESG Intelligence','Net Zero Transition','Sustainable Value Chains, Sustainable & Circular Products','Nature & Biodiversity','Operating Model'];
   const ordered = PREFERRED.filter(s => grouped[s]);
   sectorOrder.forEach(s => { if (!ordered.includes(s)) ordered.push(s); });
 
   const query = state.filters.assetQuery.trim();
-
-  let html = `<div class="asset-overview-intro">
-    <div class="asset-overview-intro-text">
-      <strong>${ASSET_DATA.length} accelerators</strong> across <strong>${ordered.length} sectors</strong>. Select a sector to explore the accelerators built within it, or search across the whole library.
-    </div>
-    <div class="asset-overview-actions">
-      <div class="asset-overview-search">
-        <span class="asset-overview-search-icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path>
-          </svg>
-        </span>
-        <input type="text" id="assetOverviewSearch" placeholder="Search across all 28 accelerators…" aria-label="Search all accelerators" autocomplete="off" value="${escHTML(query)}">
-      </div>
-      <a class="btn btn-primary btn-sm submit-accelerator-btn internal-only" href="${escHTML(newFormUrl(LISTS.assets))}" target="${LINK_TARGET}" rel="noopener" id="submitAcceleratorOverviewBtn">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
-        Submit an Accelerator
-      </a>
-    </div>
-  </div>`;
+  let html = '';
 
   if (query) {
     const q = query.toLowerCase();
     const matches = ASSET_DATA.filter(a => {
-      const blob = [a.Asset_Name, a.Sector, a.Maturity, a.Owners, a.Summary, a.Details, a.AI_Tooling].join(' ').toLowerCase();
+      const blob = [a.Asset_Name, a.Sector, a.Maturity, isExternal() ? '' : a.Owners, a.Summary, a.Details, a.AI_Tooling].join(' ').toLowerCase();
       return blob.includes(q);
     });
-    if (!matches.length) {
-      html += renderPlaceholder('No accelerators match your search','Try a different keyword, or clear the search to see all sectors.', null, null);
-    } else {
-      html += `<div style="margin-bottom: 14px; font-size:13px; color:var(--ink-500);">Found <strong style="color:var(--ink-900);">${matches.length}</strong> matching accelerator${matches.length === 1 ? '' : 's'} across all sectors.</div>`;
-      html += '<div class="asset-grid-new">' + matches.map((a, i) => renderAssetCard(a, i, q)).join('') + '</div>';
+    if (!matches.length) { html += renderPlaceholder('No accelerators match your search','Try a different keyword, or clear the search to see all sectors.'); }
+    else {
+      html += `<div style="margin-bottom:14px;font-size:13px;color:var(--ink-500);">Found <strong style="color:var(--ink-900);">${matches.length}</strong> matching accelerator${matches.length===1?'':'s'} across all sectors.</div>`;
+      html += '<div class="asset-grid-new">' + matches.map((a,i) => renderAssetCard(a,i,q)).join('') + '</div>';
     }
     container.innerHTML = html;
     wireAssetCards(container, matches);
-    wireOverviewSearch();
     return;
   }
 
   html += '<div class="sector-grid">';
-  ordered.forEach((sector, i) => {
-    const meta = SECTOR_META[sector] || { key: 'esg', icon: 'esg' };
+  ordered.forEach((sector,i) => {
+    const meta = SECTOR_META[sector] || {key:'esg',icon:'esg'};
     const items = grouped[sector];
-    const proven = items.filter(a => a.Maturity === 'Client-proven').length;
-    const ready  = items.filter(a => a.Maturity === 'Client-ready').length;
-    const mvp    = items.filter(a => a.Maturity === 'MVP').length;
+    const proven = items.filter(a => a.Maturity==='Client-proven').length;
+    const ready = items.filter(a => a.Maturity==='Client-ready').length;
+    const mvp = items.filter(a => a.Maturity==='MVP').length;
     const label = meta.shortLabel || sector;
-    const desc = meta.description || '';
-
-    html += `<button class="sector-tile ${meta.key}" data-sector="${escHTML(sector)}" type="button" style="--i: ${i};" aria-label="${escHTML(label)} — ${items.length} accelerators">
+    html += `<button class="sector-tile ${meta.key}" data-sector="${escHTML(sector)}" type="button" style="--i:${i};" aria-label="${escHTML(label)} — ${items.length} accelerators">
       <div class="sector-tile-head">
-        <div class="sector-tile-icon" style="background: var(--tile-accent);">${SECTOR_ICON_SVG[meta.icon] || ''}</div>
-        <div>
-          <div class="sector-tile-count">${items.length}</div>
-          <div class="sector-tile-count-label">Accelerator${items.length === 1 ? '' : 's'}</div>
-        </div>
+        <div class="sector-tile-icon" style="background:var(--tile-accent);">${SECTOR_ICON_SVG[meta.icon]||''}</div>
+        <div><div class="sector-tile-count">${items.length}</div><div class="sector-tile-count-label">Accelerator${items.length===1?'':'s'}</div></div>
       </div>
       <h3 class="sector-tile-title">${escHTML(label)}</h3>
-      <p class="sector-tile-desc">${escHTML(desc)}</p>
+      <p class="sector-tile-desc">${escHTML(meta.description||'')}</p>
       <div class="sector-tile-breakdown">
-        ${proven ? `<span class="sector-tile-breakdown-item proven"><span class="dot"></span>${proven} Client-proven</span>` : ''}
-        ${ready  ? `<span class="sector-tile-breakdown-item ready"><span class="dot"></span>${ready} Client-ready</span>` : ''}
-        ${mvp    ? `<span class="sector-tile-breakdown-item mvp"><span class="dot"></span>${mvp} MVP</span>` : ''}
+        ${proven?`<span class="sector-tile-breakdown-item proven"><span class="dot"></span>${proven} Client-proven</span>`:''}
+        ${ready?`<span class="sector-tile-breakdown-item ready"><span class="dot"></span>${ready} Client-ready</span>`:''}
+        ${mvp?`<span class="sector-tile-breakdown-item mvp"><span class="dot"></span>${mvp} MVP</span>`:''}
       </div>
-      <span class="sector-tile-cta">Explore ${items.length} accelerator${items.length === 1 ? '' : 's'} ${ICON.arrow}</span>
+      <span class="sector-tile-cta">Explore ${items.length} accelerator${items.length===1?'':'s'} ${ICON.arrow}</span>
     </button>`;
   });
   html += '</div>';
-
   container.innerHTML = html;
-
   container.querySelectorAll('.sector-tile').forEach(tile => {
-    tile.addEventListener('click', () => {
-      state.activeSector = tile.dataset.sector;
-      state.filters.assetMaturity = 'all';
-      state.filters.assetQuery = '';
-      renderAssets();
-    });
+    tile.addEventListener('click', () => { state.activeSector = tile.dataset.sector; state.filters.assetMaturity = 'all'; state.filters.assetQuery = ''; const hi = $('#heroSearch'); if (hi) hi.value = ''; renderAssets(); });
   });
-
-  wireOverviewSearch();
 }
 
 function renderAssetsDetail(container, toolbar) {
   const sector = state.activeSector;
-  const meta = SECTOR_META[sector] || { key: 'esg', icon: 'esg' };
+  const meta = SECTOR_META[sector] || {key:'esg',icon:'esg'};
   const label = meta.shortLabel || sector;
+  const hero = $('#heroSection'); if (hero) hero.style.display = 'none';
 
   const all = ASSET_DATA.filter(a => a.Sector === sector);
   const matFilter = state.filters.assetMaturity;
   const query = state.filters.assetQuery.trim().toLowerCase();
-
   let filtered = all.filter(a => {
     if (matFilter !== 'all' && a.Maturity !== matFilter) return false;
-    if (query) {
-      const blob = [a.Asset_Name, a.Sector, a.Maturity, a.Owners, a.Summary, a.Details, a.AI_Tooling].join(' ').toLowerCase();
-      if (!blob.includes(query)) return false;
-    }
+    if (query) { const blob = [a.Asset_Name,a.Sector,a.Maturity,isExternal()?'':a.Owners,a.Summary,a.Details,a.AI_Tooling].join(' ').toLowerCase(); if (!blob.includes(query)) return false; }
     return true;
   });
 
-  const submitUrl = newFormUrl(LISTS.assets, { Sector: label });
+  const submitUrl = newFormUrl(LISTS.assets, {Sector:label});
   let html = `<nav class="asset-detail-nav" aria-label="Asset library navigation">
-    <button class="asset-detail-back" id="assetBackBtn" type="button" aria-label="Back to all sectors">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
-      All sectors
-    </button>
-    <div class="asset-detail-breadcrumb">
-      <span>Asset Library</span>
-      <span class="asset-detail-breadcrumb-sep">/</span>
-      <span class="asset-detail-breadcrumb-current">
-        <span class="asset-detail-breadcrumb-icon ${meta.key}">${SECTOR_ICON_SVG[meta.icon] || ''}</span>
-        ${escHTML(label)}
-      </span>
-    </div>
-    <div class="asset-detail-breadcrumb-counts">
-      <strong>${all.length}</strong> accelerator${all.length === 1 ? '' : 's'}
-    </div>
-    <a class="btn btn-primary btn-sm submit-accelerator-btn internal-only" href="${escHTML(submitUrl)}" target="${LINK_TARGET}" rel="noopener" aria-label="Submit a new ${escHTML(label)} accelerator">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
-      Submit to this sector
-    </a>
+    <button class="asset-detail-back" id="assetBackBtn" type="button" aria-label="Back to all sectors"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg> All sectors</button>
+    <div class="asset-detail-breadcrumb"><span>Asset Library</span><span class="asset-detail-breadcrumb-sep">/</span><span class="asset-detail-breadcrumb-current"><span class="asset-detail-breadcrumb-icon ${meta.key}">${SECTOR_ICON_SVG[meta.icon]||''}</span>${escHTML(label)}</span></div>
+    <div class="asset-detail-breadcrumb-counts"><strong>${all.length}</strong> accelerator${all.length===1?'':'s'}</div>
+    <a class="btn btn-primary btn-sm submit-accelerator-btn" href="${escHTML(submitUrl)}" target="${LINK_TARGET}" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"></path></svg> Submit to this sector</a>
   </nav>`;
 
-  if (toolbar && container.contains(toolbar)) {
-    $('#section-assets').insertBefore(toolbar, container);
-  }
-
+  if (toolbar && container.contains(toolbar)) $('#section-assets').insertBefore(toolbar, container);
   container.innerHTML = html + '<div id="assetDetailBody"></div>';
-
-  $('#assetBackBtn').addEventListener('click', () => {
-    state.activeSector = null;
-    state.filters.assetQuery = '';
-    state.filters.assetMaturity = 'all';
-    renderAssets();
-  });
+  $('#assetBackBtn').addEventListener('click', () => { state.activeSector = null; state.filters.assetQuery = ''; state.filters.assetMaturity = 'all'; renderAssets(); });
 
   if (toolbar) {
     toolbar.classList.remove('hidden');
     $('#assetDetailBody').appendChild(toolbar);
-    const searchEl = $('#assetSearch');
-    if (searchEl.value !== state.filters.assetQuery) {
-      searchEl.value = state.filters.assetQuery;
-    }
-    $$('.maturity-filter .chip').forEach(c => {
-      const isActive = c.dataset.mat === state.filters.assetMaturity;
-      c.classList.toggle('active', isActive);
-      c.setAttribute('aria-checked', isActive ? 'true' : 'false');
-    });
-    $('#assetResultsCount').innerHTML = `<strong>${filtered.length}</strong> of ${all.length}${query ? ` matching “${escHTML(query)}”` : ''}`;
+    const searchEl = $('#assetSearch'); if (searchEl.value !== state.filters.assetQuery) searchEl.value = state.filters.assetQuery;
+    $$('.maturity-filter .chip').forEach(c => { const isActive = c.dataset.mat === state.filters.assetMaturity; c.classList.toggle('active', isActive); c.setAttribute('aria-checked', isActive?'true':'false'); });
+    $('#assetResultsCount').innerHTML = `<strong>${filtered.length}</strong> of ${all.length}${query?` matching "${escHTML(query)}"`:''}`;
   }
 
   const grid = document.createElement('div');
-  if (!filtered.length) {
-    grid.innerHTML = renderPlaceholder(
-      'No accelerators match your filters',
-      query
-        ? `No “${escHTML(label)}” accelerator matches “${escHTML(query)}” with the current maturity filter.`
-        : `No “${escHTML(label)}” accelerator matches the current maturity filter.`,
-      null, null
-    );
-  } else {
-    grid.innerHTML = '<div class="asset-grid-new">' + filtered.map((a, i) => renderAssetCard(a, i, query)).join('') + '</div>';
-  }
+  if (!filtered.length) grid.innerHTML = renderPlaceholder('No accelerators match your filters', query ? `No "${label}" accelerator matches "${query}" with the current maturity filter.` : `No "${label}" accelerator matches the current maturity filter.`);
+  else grid.innerHTML = '<div class="asset-grid-new">' + filtered.map((a,i) => renderAssetCard(a,i,query)).join('') + '</div>';
   $('#assetDetailBody').appendChild(grid);
-
   wireAssetCards($('#assetDetailBody'), filtered);
 }
 
 function renderAssetCard(a, idx, query) {
+  const matKey = a.Maturity==='Client-proven'?'proven':a.Maturity==='Client-ready'?'ready':'mvp';
+  const slideCount = (a.Slides||[]).length;
   const ext = isExternal();
-  const matKey = a.Maturity === 'Client-proven' ? 'proven' :
-                 a.Maturity === 'Client-ready'  ? 'ready' : 'mvp';
-  const slideCount = (a.Slides || []).length;
-  const onepagerLabel = a.Has_OnePager
-    ? (slideCount > 1 ? `View one-pager <span class="slide-count-badge">${slideCount}</span>` : 'View one-pager')
-    : 'No one-pager yet';
-  const displayOwner = getOwnerDisplay(a.Owners);
-  const ownerInitials = ext ? 'AC' : ((a.Owners || '').split(',')[0].trim().split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase() || 'AI');
-  const sectorMeta = SECTOR_META[a.Sector] || {};
-  const sectorLabel = sectorMeta.shortLabel || a.Sector;
+  const onepagerLabel = a.Has_OnePager ? (slideCount>1?`View one-pager <span class="slide-count-badge">${slideCount}</span>`:'View one-pager') : 'No one-pager yet';
+  const ownerInitials = (a.Owners||'').split(',')[0].trim().split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase()||'AI';
+  const sectorMeta = SECTOR_META[a.Sector]||{};
+  const sectorLabel = sectorMeta.shortLabel||a.Sector;
+  const iconContent = ext ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg>' : `<span style="font-family:var(--font-display);font-weight:800;font-size:14px;">${escHTML(ownerInitials)}</span>`;
 
-  return `<article class="asset-card-new" data-asset-id="${idx}" style="--i: ${idx % 12};" tabindex="0" aria-label="${escHTML(a.Asset_Name)} — ${escHTML(a.Maturity)}">
-    <div class="asset-card-top">
-      <div class="asset-card-icon" style="background: ${gradientFromString(a.Asset_Name)};">
-        <span style="font-family:var(--font-display);font-weight:800;font-size:14px;">${escHTML(ownerInitials)}</span>
-      </div>
-      <span class="maturity-badge ${matKey}"><span class="dot"></span>${escHTML(a.Maturity)}</span>
-    </div>
-    <h4 class="asset-card-name">${highlight(a.Asset_Name, query)}</h4>
+  return `<article class="asset-card-new" data-asset-id="${idx}" style="--i:${idx%12};" tabindex="0" aria-label="${escHTML(a.Asset_Name)} — ${escHTML(a.Maturity)}">
+    <div class="asset-card-top"><div class="asset-card-icon" style="background:${gradientFromString(a.Asset_Name)};">${iconContent}</div><span class="maturity-badge ${matKey}"><span class="dot"></span>${escHTML(a.Maturity)}</span></div>
+    <h4 class="asset-card-name">${highlight(a.Asset_Name,query)}</h4>
     <div class="asset-card-sector">${escHTML(sectorLabel)}</div>
-    <p class="asset-card-summary">${highlight(truncate(a.Summary, 200), query)}</p>
-
-    <div class="asset-card-details">
-      <div class="asset-card-details-inner">
-        <div class="asset-detail-row internal-only">
-          <span class="asset-detail-label">Owners</span>
-          <span class="asset-detail-value owners">${highlight(displayOwner, query)}</span>
-        </div>
-        <div class="asset-detail-row">
-          <span class="asset-detail-label">Sector</span>
-          <span class="asset-detail-value">${escHTML(sectorLabel)}</span>
-        </div>
-        <div class="asset-detail-row">
-          <span class="asset-detail-label">Maturity</span>
-          <span class="asset-detail-value">${escHTML(a.Maturity)}</span>
-        </div>
-        <div class="asset-detail-row">
-          <span class="asset-detail-label">AI tooling</span>
-          <span class="asset-detail-value">${highlight(a.AI_Tooling || '—', query)}</span>
-        </div>
-        <div class="asset-detail-row">
-          <span class="asset-detail-label">Detail</span>
-          <span class="asset-detail-value">${highlight(a.Details || '—', query)}</span>
-        </div>
-      </div>
-    </div>
-
+    <p class="asset-card-summary">${highlight(truncate(a.Summary,200),query)}</p>
+    <div class="asset-card-details"><div class="asset-card-details-inner">
+      ${ext?'':`<div class="asset-detail-row internal-only"><span class="asset-detail-label">Owners</span><span class="asset-detail-value owners">${highlight(a.Owners||'—',query)}</span></div>`}
+      <div class="asset-detail-row"><span class="asset-detail-label">Sector</span><span class="asset-detail-value">${escHTML(sectorLabel)}</span></div>
+      <div class="asset-detail-row"><span class="asset-detail-label">Maturity</span><span class="asset-detail-value">${escHTML(a.Maturity)}</span></div>
+      <div class="asset-detail-row"><span class="asset-detail-label">AI tooling</span><span class="asset-detail-value">${highlight(a.AI_Tooling||'—',query)}</span></div>
+      ${ext?'':`<div class="asset-detail-row internal-only"><span class="asset-detail-label">Detail</span><span class="asset-detail-value">${highlight(a.Details||'—',query)}</span></div>`}
+    </div></div>
     <div class="asset-card-actions">
-      <button class="asset-expand-btn" data-action="expand" type="button" aria-expanded="false">
-        <span class="expand-label">Show details</span>
-        ${ICON.chevron}
-      </button>
-      ${ext ? '' : `<button class="asset-onepager-btn ${a.Has_OnePager ? '' : 'disabled'}" data-action="onepager" type="button" ${a.Has_OnePager ? '' : 'disabled aria-disabled="true"'}>
-        ${onepagerLabel}
-      </button>`}
+      <button class="asset-expand-btn" data-action="expand" type="button" aria-expanded="false"><span class="expand-label">Show details</span>${ICON.chevron}</button>
+      ${ext?'':`<button class="asset-onepager-btn ${a.Has_OnePager?'':'disabled'}" data-action="onepager" type="button" ${a.Has_OnePager?'':'disabled aria-disabled="true"'}>${onepagerLabel}</button>`}
     </div>
   </article>`;
 }
 
 function wireAssetCards(root, items) {
-  root.querySelectorAll('.asset-card-new').forEach((card, idx) => {
-    const matchedAsset = items[idx];
+  root.querySelectorAll('.asset-card-new').forEach((card,idx) => {
+    const asset = items[idx];
     const expandBtn = card.querySelector('[data-action="expand"]');
     const onepagerBtn = card.querySelector('[data-action="onepager"]');
-
-    if (expandBtn) {
-      expandBtn.addEventListener('click', e => {
-        e.stopPropagation();
-        const isOpen = card.classList.toggle('expanded');
-        expandBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        expandBtn.querySelector('.expand-label').textContent = isOpen ? 'Hide details' : 'Show details';
-      });
-    }
-    if (onepagerBtn && !onepagerBtn.disabled) {
-      onepagerBtn.addEventListener('click', e => {
-        e.stopPropagation();
-        openAssetModal(matchedAsset);
-      });
-    }
+    if (expandBtn) expandBtn.addEventListener('click', e => { e.stopPropagation(); const isOpen = card.classList.toggle('expanded'); expandBtn.setAttribute('aria-expanded',isOpen?'true':'false'); expandBtn.querySelector('.expand-label').textContent = isOpen?'Hide details':'Show details'; });
+    if (onepagerBtn && !onepagerBtn.disabled) onepagerBtn.addEventListener('click', e => { e.stopPropagation(); openAssetModal(asset); });
   });
 }
 
-function wireOverviewSearch() {
-  const input = $('#assetOverviewSearch');
-  if (!input) return;
-  const handler = debounce(() => {
-    state.filters.assetQuery = input.value;
-    renderAssets();
-    const fresh = $('#assetOverviewSearch');
-    if (fresh) {
-      fresh.focus();
-      const v = fresh.value;
-      fresh.setSelectionRange(v.length, v.length);
-    }
-  }, 180);
-  input.addEventListener('input', handler);
-}
-
-
 /* ---- MODAL -------------------------------------------------------------- */
-
 let focusTrapHandler = null;
 
 function openAssetModal(asset) {
-  if (isExternal()) return;
   if (!asset || !asset.Has_OnePager || !asset.Slides || !asset.Slides.length) return;
-
-  state.modal.asset = asset;
-  state.modal.slideIndex = 0;
-
+  if (isExternal()) return;
+  state.modal.asset = asset; state.modal.slideIndex = 0;
   const overlay = $('#assetModal');
   $('#modalTitle').textContent = asset.Asset_Name;
-  const sectorMeta = SECTOR_META[asset.Sector] || {};
-  const sectorLabel = sectorMeta.shortLabel || asset.Sector;
-  $('#modalSubtitle').textContent = `${sectorLabel} · ${asset.Maturity}`;
-
+  const sm = SECTOR_META[asset.Sector]||{}; const sl = sm.shortLabel||asset.Sector;
+  $('#modalSubtitle').textContent = `${sl} · ${asset.Maturity}`;
   renderModalSlide();
-  overlay.classList.add('visible');
-  overlay.setAttribute('aria-hidden', 'false');
-
+  overlay.classList.add('visible'); overlay.setAttribute('aria-hidden','false');
   setTimeout(() => { $('#modalClose').focus(); }, 100);
-
   document.body.style.overflow = 'hidden';
-
-  // Focus trap
   focusTrapHandler = function(e) {
     if (e.key !== 'Tab') return;
     const modal = $('#modalInner');
-    const focusable = modal.querySelectorAll('button:not([disabled]), [href], input, [tabindex]:not([tabindex="-1"])');
+    const focusable = modal.querySelectorAll('button:not([disabled]),[href],input,[tabindex]:not([tabindex="-1"])');
     if (!focusable.length) return;
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    if (e.shiftKey) {
-      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
-    } else {
-      if (document.activeElement === last) { e.preventDefault(); first.focus(); }
-    }
+    const first = focusable[0]; const last = focusable[focusable.length-1];
+    if (e.shiftKey) { if (document.activeElement===first) { e.preventDefault(); last.focus(); } }
+    else { if (document.activeElement===last) { e.preventDefault(); first.focus(); } }
   };
   document.addEventListener('keydown', focusTrapHandler);
 }
 
 function closeAssetModal() {
   const overlay = $('#assetModal');
-  overlay.classList.remove('visible');
-  overlay.setAttribute('aria-hidden', 'true');
-  state.modal.asset = null;
-  state.modal.slideIndex = 0;
+  overlay.classList.remove('visible'); overlay.setAttribute('aria-hidden','true');
+  state.modal.asset = null; state.modal.slideIndex = 0;
   document.body.style.overflow = '';
-
-  if (focusTrapHandler) {
-    document.removeEventListener('keydown', focusTrapHandler);
-    focusTrapHandler = null;
-  }
+  if (focusTrapHandler) { document.removeEventListener('keydown', focusTrapHandler); focusTrapHandler = null; }
 }
 
 function renderModalSlide() {
-  const asset = state.modal.asset;
-  if (!asset) return;
-  const slides = asset.Slides || [];
-  const idx = state.modal.slideIndex;
-  const slide = slides[idx];
-  if (!slide) return;
-
-  const displayOwner = getOwnerDisplay(asset.Owners);
-  const ownerInitials = isExternal() ? 'AC' : ((asset.Owners || '').split(',')[0].trim().split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase() || 'AI');
-  const sectorMeta = SECTOR_META[asset.Sector] || { key: 'esg' };
-  const sectorLabel = sectorMeta.shortLabel || asset.Sector;
+  const asset = state.modal.asset; if (!asset) return;
+  const slides = asset.Slides||[]; const idx = state.modal.slideIndex;
+  const slide = slides[idx]; if (!slide) return;
+  const ownerInitials = (asset.Owners||'').split(',')[0].trim().split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase()||'AI';
+  const sm = SECTOR_META[asset.Sector]||{key:'esg'}; const sl = sm.shortLabel||asset.Sector;
 
   let sectionsHtml = '';
-  (slide.sections || []).forEach(sec => {
+  (slide.sections||[]).forEach(sec => {
     sectionsHtml += `<div class="slide-section"><h4>${escHTML(sec.heading)}</h4>`;
     if (sec.body) sectionsHtml += `<p>${escHTML(sec.body)}</p>`;
-    if (sec.list && sec.list.length) {
-      sectionsHtml += '<ul>' + sec.list.map(li => `<li>${escHTML(li)}</li>`).join('') + '</ul>';
-    }
+    if (sec.list && sec.list.length) sectionsHtml += '<ul>' + sec.list.map(li=>`<li>${escHTML(li)}</li>`).join('') + '</ul>';
     sectionsHtml += '</div>';
   });
 
-  const html = `<div class="slide-container">
-    <div class="slide-content">
-      <div class="slide-header">
-        <div class="slide-icon" style="background: ${gradientFromString(asset.Asset_Name)};">
-          <span style="font-family:var(--font-display);font-weight:800;font-size:14px;">${escHTML(ownerInitials)}</span>
-        </div>
-        <div>
-          <div class="slide-title">${escHTML(slide.title)}</div>
-          ${slide.subtitle ? `<div class="slide-subtitle">${escHTML(slide.subtitle)}</div>` : ''}
-        </div>
-      </div>
-      ${sectionsHtml}
-    </div>
+  const html = `<div class="slide-container"><div class="slide-content">
+    <div class="slide-header"><div class="slide-icon" style="background:${gradientFromString(asset.Asset_Name)};"><span style="font-family:var(--font-display);font-weight:800;font-size:14px;">${escHTML(ownerInitials)}</span></div>
+    <div><div class="slide-title">${escHTML(slide.title)}</div>${slide.subtitle?`<div class="slide-subtitle">${escHTML(slide.subtitle)}</div>`:''}</div></div>
+    ${sectionsHtml}</div>
     <div class="slide-meta-row">
-      <div class="slide-meta-item internal-only"><div class="label">Owners</div><div class="value">${escHTML(displayOwner)}</div></div>
-      <div class="slide-meta-item"><div class="label">Sector</div><div class="value">${escHTML(sectorLabel)}</div></div>
+      <div class="slide-meta-item owners-meta"><div class="label">Owners</div><div class="value">${escHTML(asset.Owners||'—')}</div></div>
+      <div class="slide-meta-item"><div class="label">Sector</div><div class="value">${escHTML(sl)}</div></div>
       <div class="slide-meta-item"><div class="label">Maturity</div><div class="value">${escHTML(asset.Maturity)}</div></div>
-      <div class="slide-meta-item"><div class="label">AI tooling</div><div class="value">${escHTML(asset.AI_Tooling || '—')}</div></div>
-    </div>
-  </div>`;
+      <div class="slide-meta-item"><div class="label">AI tooling</div><div class="value">${escHTML(asset.AI_Tooling||'—')}</div></div>
+    </div></div>`;
 
   $('#modalBody').innerHTML = html;
-  $('#slideCounter').innerHTML = `<strong>${idx + 1}</strong> of ${slides.length}`;
-  $('#slidePrev').disabled = idx === 0;
-  $('#slideNext').disabled = idx === slides.length - 1;
-  const navVisible = slides.length > 1;
-  $('#slidePrev').style.visibility = navVisible ? 'visible' : 'hidden';
-  $('#slideNext').style.visibility = navVisible ? 'visible' : 'hidden';
-
+  $('#slideCounter').innerHTML = `<strong>${idx+1}</strong> of ${slides.length}`;
+  $('#slidePrev').disabled = idx===0; $('#slideNext').disabled = idx===slides.length-1;
+  const vis = slides.length>1; $('#slidePrev').style.visibility = vis?'visible':'hidden'; $('#slideNext').style.visibility = vis?'visible':'hidden';
   const pag = $('#slidePagination');
-  pag.innerHTML = slides.map((s, i) =>
-    `<button class="slide-dot ${i === idx ? 'active' : ''}" data-idx="${i}" aria-label="Slide ${i+1}" type="button"></button>`
-  ).join('');
-  pag.querySelectorAll('.slide-dot').forEach(dot => {
-    dot.addEventListener('click', () => {
-      state.modal.slideIndex = parseInt(dot.dataset.idx, 10);
-      renderModalSlide();
-    });
-  });
+  pag.innerHTML = slides.map((s,i)=>`<button class="slide-dot ${i===idx?'active':''}" data-idx="${i}" aria-label="Slide ${i+1}" type="button"></button>`).join('');
+  pag.querySelectorAll('.slide-dot').forEach(dot => { dot.addEventListener('click', () => { state.modal.slideIndex = parseInt(dot.dataset.idx,10); renderModalSlide(); }); });
 }
 
-function nextSlide() {
-  const slides = state.modal.asset && state.modal.asset.Slides;
-  if (!slides) return;
-  if (state.modal.slideIndex < slides.length - 1) {
-    state.modal.slideIndex++;
-    renderModalSlide();
-  }
-}
-function prevSlide() {
-  if (state.modal.slideIndex > 0) {
-    state.modal.slideIndex--;
-    renderModalSlide();
-  }
-}
+function nextSlide() { const slides = state.modal.asset && state.modal.asset.Slides; if (!slides) return; if (state.modal.slideIndex < slides.length-1) { state.modal.slideIndex++; renderModalSlide(); } }
+function prevSlide() { if (state.modal.slideIndex > 0) { state.modal.slideIndex--; renderModalSlide(); } }
 
-
-/* ---- VIEW MODE TOGGLE --------------------------------------------------- */
-
+/* ---- VIEW MODE ---------------------------------------------------------- */
 function setViewMode(mode) {
   state.viewMode = mode;
-
-  // Update toggle UI
-  const internalBtn = $('#modeInternal');
-  const externalBtn = $('#modeExternal');
-  if (mode === 'internal') {
-    internalBtn.classList.add('active');
-    internalBtn.setAttribute('aria-checked', 'true');
-    externalBtn.classList.remove('active');
-    externalBtn.setAttribute('aria-checked', 'false');
-    document.body.classList.remove('external-mode');
-  } else {
-    externalBtn.classList.add('active');
-    externalBtn.setAttribute('aria-checked', 'true');
-    internalBtn.classList.remove('active');
-    internalBtn.setAttribute('aria-checked', 'false');
-    document.body.classList.add('external-mode');
-  }
-
-  // Close modal if switching to external
-  if (mode === 'external' && state.modal.asset) {
-    closeAssetModal();
-  }
-
-  // Re-render everything
+  document.body.classList.toggle('external-mode', mode==='external');
+  $('#modeInternal').classList.toggle('active', mode==='internal');
+  $('#modeExternal').classList.toggle('active', mode==='external');
+  $('#modeInternal').setAttribute('aria-checked', mode==='internal'?'true':'false');
+  $('#modeExternal').setAttribute('aria-checked', mode==='external'?'true':'false');
+  const fl = $('#footerLabel');
+  if (fl) fl.textContent = mode==='external' ? 'EMEA Sustainability · External · Accenture' : 'EMEA Sustainability · Internal · Accenture';
+  if (mode==='external' && state.modal.asset) closeAssetModal();
   renderAssets();
 }
-
-
-/* ---- HERO SEARCH -------------------------------------------------------- */
-
-function wireHeroSearch() {
-  const input = $('#heroSearchInput');
-  const btn = $('#heroSearchBtn');
-  if (!input) return;
-
-  const doSearch = () => {
-    state.filters.assetQuery = input.value.trim();
-    state.activeSector = null;
-    state.filters.assetMaturity = 'all';
-    renderAssets();
-    // Scroll to results
-    const target = $('#section-assets');
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
-  input.addEventListener('keydown', e => {
-    if (e.key === 'Enter') doSearch();
-  });
-  if (btn) btn.addEventListener('click', doSearch);
-}
-
 
 /* ---- INIT --------------------------------------------------------------- */
 function init() {
-  // Compute hero stats dynamically
-  const proven = ASSET_DATA.filter(a => a.Maturity === 'Client-proven').length;
-  const ready = ASSET_DATA.filter(a => a.Maturity === 'Client-ready').length;
-  const mvp = ASSET_DATA.filter(a => a.Maturity === 'MVP').length;
-  const statProven = $('#heroStatProven');
-  const statReady = $('#heroStatReady');
-  const statMvp = $('#heroStatMvp');
-  if (statProven) statProven.textContent = proven;
-  if (statReady) statReady.textContent = ready;
-  if (statMvp) statMvp.textContent = mvp;
-
-  // Detail-view search
+  const heroInput = $('#heroSearch');
+  if (heroInput) {
+    const h = debounce(() => { state.filters.assetQuery = heroInput.value; state.activeSector = null; renderAssets(); const f = $('#heroSearch'); if (f) { f.focus(); f.setSelectionRange(f.value.length, f.value.length); } }, 180);
+    heroInput.addEventListener('input', h);
+  }
   const searchInput = $('#assetSearch');
   if (searchInput) {
-    const handler = debounce(() => {
-      state.filters.assetQuery = searchInput.value;
-      renderAssets();
-      const fresh = $('#assetSearch');
-      if (fresh) {
-        fresh.focus();
-        const v = fresh.value;
-        fresh.setSelectionRange(v.length, v.length);
-      }
-    }, 180);
-    searchInput.addEventListener('input', handler);
+    const h = debounce(() => { state.filters.assetQuery = searchInput.value; renderAssets(); const f = $('#assetSearch'); if (f) { f.focus(); f.setSelectionRange(f.value.length, f.value.length); } }, 180);
+    searchInput.addEventListener('input', h);
   }
-
-  // Maturity filter chips
-  $$('.maturity-filter .chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      state.filters.assetMaturity = chip.dataset.mat;
-      $$('.maturity-filter .chip').forEach(c => {
-        const isActive = c.dataset.mat === chip.dataset.mat;
-        c.classList.toggle('active', isActive);
-        c.setAttribute('aria-checked', isActive ? 'true' : 'false');
-      });
-      renderAssets();
-    });
-  });
-
-  // Modal controls
+  $$('.maturity-filter .chip').forEach(chip => { chip.addEventListener('click', () => { state.filters.assetMaturity = chip.dataset.mat; $$('.maturity-filter .chip').forEach(c => { const a = c.dataset.mat===chip.dataset.mat; c.classList.toggle('active',a); c.setAttribute('aria-checked',a?'true':'false'); }); renderAssets(); }); });
   $('#modalClose').addEventListener('click', closeAssetModal);
   $('#slidePrev').addEventListener('click', prevSlide);
   $('#slideNext').addEventListener('click', nextSlide);
-  $('#assetModal').addEventListener('click', e => {
-    if (e.target === $('#assetModal')) closeAssetModal();
-  });
-  document.addEventListener('keydown', e => {
-    if (!state.modal.asset) return;
-    if (e.key === 'Escape') closeAssetModal();
-    else if (e.key === 'ArrowLeft') prevSlide();
-    else if (e.key === 'ArrowRight') nextSlide();
-  });
-
-  // View mode toggle
+  $('#assetModal').addEventListener('click', e => { if (e.target===$('#assetModal')) closeAssetModal(); });
+  document.addEventListener('keydown', e => { if (!state.modal.asset) return; if (e.key==='Escape') closeAssetModal(); else if (e.key==='ArrowLeft') prevSlide(); else if (e.key==='ArrowRight') nextSlide(); });
   $('#modeInternal').addEventListener('click', () => setViewMode('internal'));
   $('#modeExternal').addEventListener('click', () => setViewMode('external'));
-
-  // Hero search
-  wireHeroSearch();
-
-  // Footer link
   if ($('#footerSiteLink')) $('#footerSiteLink').setAttribute('href', SP_SITE);
-
-  // SharePoint iframe detection: rewrite target="_blank" to target="_top"
-  if (window.self !== window.top) {
-    document.querySelectorAll('a[target="_blank"]').forEach(a => {
-      a.setAttribute('target', '_top');
-    });
-  }
-
+  if (window.self !== window.top) document.querySelectorAll('a[target="_blank"]').forEach(a => { a.setAttribute('target','_top'); });
+  const sectors = new Set(ASSET_DATA.map(a=>a.Sector));
+  const proven = ASSET_DATA.filter(a=>a.Maturity==='Client-proven').length;
+  if ($('#statTotal')) $('#statTotal').textContent = ASSET_DATA.length;
+  if ($('#statSectors')) $('#statSectors').textContent = sectors.size;
+  if ($('#statProven')) $('#statProven').textContent = proven;
   renderAssets();
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
-}
+if (document.readyState==='loading') document.addEventListener('DOMContentLoaded', init);
+else init();
 
 </script>
 </body>
